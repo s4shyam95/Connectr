@@ -33,7 +33,7 @@ def listen(request):
     data = json.loads(request.body)
     if data["name"] == "app.install":
         u = User()
-        u.acces_token = data["token"]
+        u.access_token = data["token"]
         u.user_id = data["userId"]
         u.save(force_insert=True)
     if data["name"] == "app.uninstall":
