@@ -41,7 +41,7 @@ def listen(request):
         u.delete()
     if data["name"] == "client.slashCommand":
         text = data["text"]
-        texts = text.strip.split(' ')
+        texts = (text.strip()).split(' ')
         ip = texts[0].strip
         text = " ".join(texts[1:])
         g = Group.objects.get(grp_id=data["chat"])
