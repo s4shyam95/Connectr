@@ -14,4 +14,4 @@ def configure(request):
 
 @csrf_exempt
 def callback(request):
-    return HttpResponse(str(request))
+    return HttpResponse('worked')
