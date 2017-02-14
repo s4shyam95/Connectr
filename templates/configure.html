@@ -34,6 +34,7 @@
         success: function(result) {
           $('#hash-script').text($('input[name="options"]:checked').val());
           $("#show-script").show();
+          location.reload();
         }
       });
     });

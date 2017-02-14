@@ -6,27 +6,14 @@
 
 {% block body_block %}
   <!--Add alert here-->
-  Your company has already set group at {{ grp.name }}
+  Your company {{ grp.company }} has set group at {{ grp.group_name }}
+
+  <!--Code DIV Here-->
+  <div id="show-script" >
+    <!--Well here in that code tag-->
+    &lt;script type=&quot;text/javascript&quot; id=&quot;rocketapp-script&quot; data-attr=&quot;<span id="hash-script">{{ grp.grp_id }}</span>&quot; src=&quot;https://peaceful-hollows-95315.herokuapp.com/static/js/chart.js&quot; &gt;&lt;/script&gt;
+  </div>
 {% endblock %}
 
 {% block extra_js %}
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("#select-button").click(function() {
-      $.ajax({
-        url:"index.html",
-        method: "GET",
-        data: {
-          grp_id: $('input[name="options"]:checked').val(),
-          company_name: {{ company_name }},
-          
-        },
-        success: function(result) {
-          $('#hash-script').text($('input[name="options"]:checked').val());
-          $("#show-script").show();
-        }
-      });
-    });
-  });
-</script>
 {% endblock %}
