@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'listen/', listen),
     url(r'configure/', configure),
     url(r'callback/', callback),
+    url(r'voice/', voice),
+    url(r'client/', client),
 ]
