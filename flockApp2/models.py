@@ -25,7 +25,7 @@ class User(models.Model):
 
 class Chat(models.Model):
     text = models.CharField(max_length=512)
-    #1 is us, 2 is user
+    grp = models.ForeignKey(Group)
     by = models.IntegerField(max_length=1)
     ip = models.CharField(max_length=512)
 

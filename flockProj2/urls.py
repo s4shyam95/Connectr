@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'client/', client),
     url(r'naya_grp/', new_group),
     url(r'naya_msg/', new_message),
+    url(r'get_msgs/', get_messages),
 ]

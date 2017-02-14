@@ -39,6 +39,20 @@ def listen(request):
     if data["name"] == "app.uninstall":
         u = User.objects.get(user_id=data["userId"])
         u.delete()
+    if data["name"] == "client.slashCommand":
+        text = data["text"]
+        texts = text.strip.split(' ')
+        ip = texts[0].strip
+        text = " ".join(texts[1:])
+        g = Group.objects.get(grp_id=data["chat"])
+        msg = Chat()
+        msg.text = text
+        msg.by = 1
+        msg.grp = g
+        msg.ip = ip
+        msg.save(force_insert=True)
+        return HttpResponse('ok')
+
     return HttpResponse('listen')
 
 @csrf_exempt
@@ -97,8 +111,31 @@ def new_message(request):
     send_as_hal = SendAs(name=str(get_client_ip(request)),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
     send_as_message = Message(to=grp_id,text=text,send_as=send_as_hal)
     res = flock_client.send_chat(send_as_message)
-    print(res)
+    msg = Chat()
+    msg.text = text
+    msg.by = 2
+    msg.grp = g
+    msg.ip = str(get_client_ip(request))
+    msg.save(force_insert=True)
     return HttpResponse('ok')
+
+@csrf_exempt
+def get_messages(request):
+    grp_id = request.GET['grp_id']
+    g = Group.objects.get(grp_id=grp_id)
+    ip = str(get_client_ip(request))
+    ret = ''
+    lis = Chat.objects.filter(ip=ip,grp=g)
+    for i in lis:
+        ret = ret + str(i.by) + str(i.text) + '~'
+    return HttpResponse(ret)
+
+
+
+
+
+
+
 
 
 @csrf_exempt
