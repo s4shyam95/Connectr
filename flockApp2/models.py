@@ -20,7 +20,7 @@ class User(models.Model):
     grp = models.ForeignKey(Group, null=True)
 
     def __unicode__(self):
-        return self.acces_token
+        return self.access_token
 
 class Chat(models.Model):
     text = models.CharField(max_length=512)
