@@ -8,6 +8,7 @@
   {% for grp in grps %}
     <input type="radio" name="options"  value="{{ grp.id }}">{{ grp.name }}</input>
   {% endfor %}
+  <input id="comp-name" type="text" name="company_name" placeholder="Enter your company label">
   <button id="select-button">Select</button>
   <!--Code DIV Here-->
   <div id="show-script" style="display: none;">
@@ -26,7 +27,7 @@
         method: "GET",
         data: {
           grp_id: $('input[name="options"]:checked').val(),
-          company_name: {{ company_name }},
+          company_name: $('#comp-name').val(),
           grp_name: $('input[name="options"]:checked').text(),
           
         },
