@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 @csrf_exempt
 def listen(request):
-    return HttpResponse('Okay')
+    return HttpResponse(str(request))
 
 @csrf_exempt
 def configure(request):
