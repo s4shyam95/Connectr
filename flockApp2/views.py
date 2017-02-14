@@ -34,7 +34,7 @@ default_client = "Shyam"
 
 @csrf_exempt
 def voice(request):
-    dest_number = request.GET['PhoneNumber']
+    dest_number = request.POST['PhoneNumber']
     resp = twilio.twiml.Response()
     with resp.dial(callerId=caller_id) as r:
         if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
@@ -47,9 +47,7 @@ def voice(request):
 def client(request):
     account_sid = "AC0fce7ce826b2ddcf434406b708fa8f32"
     auth_token = "7ed3c51485f2893e9cb980efdf3fe8ea"
-
     capability = TwilioCapability(account_sid, auth_token)
-
     application_sid = "APf6eb9001848f45a70d2f264b6f585b8d" # Twilio Application Sid
     capability.allow_client_outgoing(application_sid)
     capability.allow_client_incoming("jenny")
