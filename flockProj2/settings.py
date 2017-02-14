@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'flockApp2'
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,11 @@ USE_TZ = True
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
+STATIC_PATH = os.path.join(BASE_DIR,'static')
+
+STATICFILES_DIRS = (
+    STATIC_PATH,
+)
 
 TEMPLATES = [
 {

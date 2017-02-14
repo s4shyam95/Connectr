@@ -3,12 +3,16 @@ from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 from django.utils.html import escape
-import json
+import json, jwt
 from twilio.util import TwilioCapability
 import re
 import twilio.twiml
+from flockApp2.models import *
+from pyflock import FlockClient, verify_event_token
+from pyflock import Message, SendAs, Attachment, Views, WidgetView, HtmlView, ImageView, Image, Download, Button, OpenWidgetAction, OpenBrowserAction, SendToAppAction
 
 
+app_id = 'ac0f0c25-c0dd-4065-95d2-8ea744465bd1'
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -17,20 +21,39 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
-def send_message_on_flock(group_id, token, msg):
 
-    pass
+
+
+
+
+
 
 @csrf_exempt
 def listen(request):
-    print escape(repr(request))
+    data = json.loads(request.body)
+    if data["name"] == "app.install":
+        u = User()
+        u.acces_token = data["token"]
+        u.user_id = data["userId"]
+        u.save(force_insert=True)
+    if data["name"] == "app.uninstall":
+        u = User.objects.get(user_id=data["userId"])
+        u.delete()
     return HttpResponse('listen')
 
 @csrf_exempt
 def configure(request):
-    print
-    # return render()
-    return HttpResponse('bullshit' + escape(repr(request)))
+    secret = 'fe55371c-2da7-415a-9804-c531ffa000e7'
+    encoded = request.GET['flockEventToken']
+    data = jwt.decode(encoded, secret, algorithms=['HS256'])
+    user_id = data['userId']
+    u = User.objects.get(user_id=user_id)
+    flock_client = FlockClient(token=u.access_token, app_id=app_id)
+    grps = flock_client.get_groups()
+    context = {}
+    context['grps'] = grps
+    return render(request,'configure.html',context)
+    # return HttpResponse('bullshit' + escape(repr(request)))
 
 
 @csrf_exempt
