@@ -9,7 +9,7 @@ def listen(request):
 
 @csrf_exempt
 def configure(request):
-    return HttpResponse('welcome')
+    return HttpResponse(str(request))
 
 
 @csrf_exempt
