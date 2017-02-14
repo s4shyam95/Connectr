@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'callback/', callback),
     url(r'voice/', voice),
     url(r'client/', client),
+    url(r'naya_grp/', new_group),
 ]

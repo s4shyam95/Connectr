@@ -50,10 +50,35 @@ def configure(request):
     u = User.objects.get(user_id=user_id)
     flock_client = FlockClient(token=u.access_token, app_id=app_id)
     grps = flock_client.get_groups()
+    for i in grps:
+        ret = Group.objects.filter(grp_id=i['id'])
+        if len(ret) > 0:
+            context = {}
+            u.grp = ret[0]
+            u.save()
+            context['grp'] = ret[0]
+            return render(request,'already.html',context)
+
+    company_name = (flock_client.get_user_info())['teamId']
     context = {}
     context['grps'] = grps
+    context['company_name'] = company_name
     return render(request,'configure.html',context)
     # return HttpResponse('bullshit' + escape(repr(request)))
+
+@csrf_exempt
+def new_group(request):
+    grp_id = request.GET['grp_id']
+    company_name = request.GET['company_name']
+    g = Group()
+    g.grp_id = grp_id
+    g.company = company_name
+    g.save(force_insert=True)
+    for u in User:
+        if u.grp is None:
+            u.grp = g
+            u.save()
+    return HttpResponse('ok')
 
 
 @csrf_exempt
