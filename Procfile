@@ -1,2 +1,2 @@
-web: gunicorn flockProj2.wsgi --log-file -
+web: gunicorn flockProj2.wsgi --log-file=-
 
