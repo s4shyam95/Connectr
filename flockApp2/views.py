@@ -94,7 +94,7 @@ def new_message(request):
             access = u.access_token
             break
     flock_client = FlockClient(token=access, app_id=app_id)
-    send_as_hal = SendAs(name=str(get_client_ip(request)))
+    send_as_hal = SendAs(name=str(get_client_ip(request)),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
     send_as_message = Message(to=grp_id,text=text,send_as=send_as_hal)
     res = flock_client.send_chat(send_as_message)
     print(res)
