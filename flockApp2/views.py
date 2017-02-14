@@ -8,6 +8,19 @@ from twilio.util import TwilioCapability
 import re
 import twilio.twiml
 
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+def send_message_on_flock(group_id, token, msg):
+
+    pass
+
 @csrf_exempt
 def listen(request):
     print escape(repr(request))
@@ -15,8 +28,9 @@ def listen(request):
 
 @csrf_exempt
 def configure(request):
-    print 'bullshit' + escape(repr(request))
-    return HttpResponse('configured')
+    print
+    # return render()
+    return HttpResponse('bullshit' + escape(repr(request)))
 
 
 @csrf_exempt
@@ -25,12 +39,13 @@ def callback(request):
 
 
 
+
+
+
+
+#Voice code begins here
 caller_id = "+19172596412 "
-
-# put your default Twilio Client name here, for when a phone number isn't given
 default_client = "Shyam"
-
-
 
 @csrf_exempt
 def voice(request):
