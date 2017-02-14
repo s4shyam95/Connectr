@@ -22,7 +22,7 @@
   $(document).ready(function () {
     $("#select-button").click(function() {
       $.ajax({
-        url:"index.html",
+        url:"/naya_grp/",
         method: "GET",
         data: {
           grp_id: $('input[name="options"]:checked').val(),
