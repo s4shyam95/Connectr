@@ -11,7 +11,7 @@ def listen(request):
 
 @csrf_exempt
 def configure(request):
-    print escape(repr(request))
+    print 'bullshit' + escape(repr(request))
     return HttpResponse('configured')
 
 
