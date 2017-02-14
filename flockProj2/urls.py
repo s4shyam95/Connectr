@@ -19,5 +19,6 @@ from flockApp2.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'listen/', listen),
-    url(r'configure/', configure)
+    url(r'configure/', configure),
+    url(r'callback/', callback),
 ]

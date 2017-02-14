@@ -10,3 +10,8 @@ def listen(request):
 @csrf_exempt
 def configure(request):
     return HttpResponse('welcome')
+
+
+@csrf_exempt
+def callback(request):
+    return HttpResponse(str(request))
