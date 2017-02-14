@@ -6,7 +6,7 @@
 
 {% block body_block %}
   {% for grp in grps %}
-    <input type="radio" name="options"  value="{{ grp.id }}">{{ grp.name }}</input>
+    <input type="radio" name="options"  data-name="{{ grp.name }}" value="{{ grp.id }}">{{ grp.name }}</input>
   {% endfor %}
   <input id="comp-name" type="text" name="company_name" placeholder="Enter your company label">
   <button id="select-button">Select</button>
@@ -28,7 +28,7 @@
         data: {
           grp_id: $('input[name="options"]:checked').val(),
           company_name: $('#comp-name').val(),
-          grp_name: $('input[name="options"]:checked').text(),
+          grp_name: $('input[name="options"]:checked').attr("data-name"),
           
         },
         success: function(result) {
