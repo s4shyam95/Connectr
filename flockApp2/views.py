@@ -70,11 +70,13 @@ def configure(request):
 def new_group(request):
     grp_id = request.GET['grp_id']
     company_name = request.GET['company_name']
+    grp_name = request.GET['grp_name']
     g = Group()
     g.grp_id = grp_id
     g.company = company_name
+    g.group_name = grp_name
     g.save(force_insert=True)
-    for u in User:
+    for u in User.objects.all():
         if u.grp is None:
             u.grp = g
             u.save()

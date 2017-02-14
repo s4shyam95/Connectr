@@ -10,6 +10,7 @@ from django.db import models
 class Group(models.Model):
     grp_id = models.CharField(max_length=512)
     company = models.CharField(max_length=512)
+    group_name = models.CharField(max_length=512)
 
     def __unicode__(self):
         return self.company

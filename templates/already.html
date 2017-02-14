@@ -5,16 +5,8 @@
 {% endblock %}
 
 {% block body_block %}
-  {% for grp in grps %}
-    <input type="radio" name="options"  value="{{ grp.id }}">{{ grp.name }}</input>
-  {% endfor %}
-  <button id="select-button">Select</button>
-  <!--Code DIV Here-->
-  <div id="show-script" style="display: none;">
-    <!--Well here in that code tag-->
-    &lt;script type=&quot;text/javascript&quot; id=&quot;rocketapp-script&quot; data-attr=&quot;<span id="hash-script"></span>&quot; src=&quot;https://peaceful-hollows-95315.herokuapp.com/static/js/chart.js&quot; &gt;&lt;/script&gt;
-  </div>
-
+  <!--Add alert here-->
+  Your company has already set group at {{ grp.name }}
 {% endblock %}
 
 {% block extra_js %}
@@ -27,7 +19,6 @@
         data: {
           grp_id: $('input[name="options"]:checked').val(),
           company_name: {{ company_name }},
-          grp_name: $('input[name="options"]:checked').text(),
           
         },
         success: function(result) {
