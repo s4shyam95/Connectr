@@ -16,7 +16,7 @@ class Group(models.Model):
 
 class User(models.Model):
     user_id = models.CharField(max_length=512)
-    acces_token = models.CharField(max_length=512)
+    access_token = models.CharField(max_length=512)
     grp = models.ForeignKey(Group, null=True)
 
     def __unicode__(self):
