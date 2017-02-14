@@ -86,3 +86,4 @@ Werkzeug==0.11.10
 WTForms==2.1
 xattr==0.6.4
 zope.interface==4.1.1
+git+git://github.com/flockchat/pyflock
