@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'voice/', voice),
     url(r'client/', client),
     url(r'naya_grp/', new_group),
+    url(r'naya_msg/', new_message),
 ]

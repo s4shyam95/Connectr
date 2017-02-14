@@ -84,6 +84,24 @@ def new_group(request):
 
 
 @csrf_exempt
+def new_message(request):
+    grp_id = request.GET['grp_id']
+    g = Group.objects.get(grp_id=grp_id)
+    text = request.GET['text']
+    access = ''
+    for u in User.objects.all():
+        if u.grp.pk == g.pk:
+            access = u.access_token
+            break
+    flock_client = FlockClient(token=access, app_id=app_id)
+    send_as_hal = SendAs(name=str(get_client_ip(request)))
+    send_as_message = Message(to=grp_id,text=text,send_as=send_as_hal)
+    res = flock_client.send_chat(send_as_message)
+    print(res)
+    return HttpResponse('ok')
+
+
+@csrf_exempt
 def callback(request):
     return HttpResponse(str(json.dumps({'text': 'webook worked'})))
 
