@@ -124,11 +124,14 @@ def get_messages(request):
     grp_id = request.GET['grp_id']
     g = Group.objects.get(grp_id=grp_id)
     ip = str(get_client_ip(request))
-    ret = ''
     lis = Chat.objects.filter(ip=ip,grp=g)
+    lst = []
     for i in lis:
-        ret = ret + str(i.by) + str(i.text) + '~'
-    return HttpResponse(ret)
+        dic = {}
+        dic['by'] = i.by
+        dic['text'] = i.text
+        lst.append(dic)
+    return HttpResponse(json.dumps([dict(mpn=pn) for pn in lst]))
 
 
 
