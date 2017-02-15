@@ -51,7 +51,7 @@ def listen(request):
         msg.grp = g
         msg.ip = ip
         msg.save(force_insert=True)
-        return HttpResponse('ok')
+        return HttpResponse('{"text": "Reply Sent to User"}')
 
     return HttpResponse('listen')
 
