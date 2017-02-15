@@ -49,8 +49,8 @@ def listen(request):
         texts = (text.strip()).split(' ')
         #not really ip @name hai ye
         name = (texts[0].strip())[1:]
+        name = name.lower()
         ipman = IPMan.objects.get(name=name)
-
         text = " ".join(texts[1:])
         g = Group.objects.get(grp_id=data["chat"])
         access = ''
