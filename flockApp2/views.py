@@ -10,7 +10,7 @@ import twilio.twiml
 from flockApp2.models import *
 from pyflock import FlockClient, verify_event_token
 from pyflock import Message, SendAs, Attachment, Views, WidgetView, HtmlView, ImageView, Image, Download, Button, OpenWidgetAction, OpenBrowserAction, SendToAppAction
-
+import random
 
 app_id = 'ac0f0c25-c0dd-4065-95d2-8ea744465bd1'
 def get_client_ip(request):
@@ -24,7 +24,12 @@ def get_client_ip(request):
 
 
 
-
+def get_random_name():
+    stri = "abcdefghijlkmnopqrstuvwxyz"
+    ret = ""
+    for i in range(4):
+        ret = ret + random.choice(stri)
+    return ret
 
 
 
@@ -42,7 +47,10 @@ def listen(request):
     if data["name"] == "client.slashCommand":
         text = data["text"]
         texts = (text.strip()).split(' ')
-        ip = texts[0].strip()
+        #not really ip @name hai ye
+        name = (texts[0].strip())[1:]
+        ipman = IPMan.objects.get(name=name)
+
         text = " ".join(texts[1:])
         g = Group.objects.get(grp_id=data["chat"])
         access = ''
@@ -54,9 +62,10 @@ def listen(request):
         msg.text = text
         msg.by = 1
         msg.grp = g
-        msg.ip = ip
+        msg.ip = ipman.ip
+        msg.ipman = ipman
         msg.save(force_insert=True)
-        text = "'"+text+"' to " + str(ip)
+        text = "'"+text+"' to " + str(msg.ipman.name)
         flock_client = FlockClient(token=access, app_id=app_id)
         send_as_hal = SendAs(name=str(data["userName"]),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
         send_as_message = Message(to=g.grp_id,text=text,send_as=send_as_hal)
@@ -117,16 +126,25 @@ def new_message(request):
         if u.grp.pk == g.pk:
             access = u.access_token
             break
-    flock_client = FlockClient(token=access, app_id=app_id)
-    send_as_hal = SendAs(name=str(get_client_ip(request)),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
-    send_as_message = Message(to=grp_id,text=text,send_as=send_as_hal)
-    res = flock_client.send_chat(send_as_message)
     msg = Chat()
     msg.text = text
     msg.by = 2
     msg.grp = g
     msg.ip = str(get_client_ip(request))
+    lis = IPMan.objects.filter(ip=str(get_client_ip(request)))
+    if len(lis)==0:
+        ipman = IPMan()
+        ipman.ip = str(get_client_ip(request))
+        ipman.name = get_random_name()
+        ipman.save(force_insert=True)
+        msg.ipman = ipman
+    else:
+        msg.ipman = lis[0]
     msg.save(force_insert=True)
+    flock_client = FlockClient(token=access, app_id=app_id)
+    send_as_hal = SendAs(name=msg.ipman.name,profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+    send_as_message = Message(to=grp_id,text=text,send_as=send_as_hal)
+    res = flock_client.send_chat(send_as_message)
     return HttpResponse('ok')
 
 @csrf_exempt
