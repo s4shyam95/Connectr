@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'flockApp2'
+    'flockApp2',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -126,6 +129,8 @@ STATIC_PATH = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
 {
