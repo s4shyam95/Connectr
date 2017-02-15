@@ -42,7 +42,7 @@ def listen(request):
     if data["name"] == "client.slashCommand":
         text = data["text"]
         texts = (text.strip()).split(' ')
-        ip = texts[0].strip
+        ip = texts[0].strip()
         text = " ".join(texts[1:])
         g = Group.objects.get(grp_id=data["chat"])
         msg = Chat()
