@@ -1,0 +1,1218 @@
+#rocketapp-button {
+    font: normal 14px Tahoma, Verdana, Sans-Serif;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    border: 0 solid rgba(0, 0, 0, 0);
+    background: #15cc51;
+    position: fixed;
+    right: 20px;
+    bottom: 0;
+    z-index: 2147483647;
+    -webkit-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    cursor: pointer;
+    visibility: visible;
+    opacity: 1
+}
+#rocketapp-button:not(.rocketapp-button-float) {
+    padding: 0 5px 0 10px
+}
+#rocketapp-button.rocketapp-animatable {
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    -webkit-transition-property: visibility, opacity;
+    -moz-transition-property: visibility, opacity;
+    -o-transition-property: visibility, opacity;
+    transition-property: visibility, opacity
+}
+#rocketapp-button.rocketapp-widget-opened {
+    visibility: hidden;
+    opacity: 0
+}
+#rocketapp-button.rocketapp-widget-opened.rocketapp-animatable {
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    -webkit-transition-property: visibility, opacity;
+    -moz-transition-property: visibility, opacity;
+    -o-transition-property: visibility, opacity;
+    transition-property: visibility, opacity
+}
+#rocketapp-button.rocketapp-shaking:not(.rocketapp-widget-opened) {
+    -webkit-animation: jump 1.5s ease 0s 1 normal;
+    animation: jump 1.5s ease 0s 1 normal
+}
+@-webkit-keyframes jump {
+    0% {
+        -webkit-transform: translateY(0)
+    }
+    20% {
+        -webkit-transform: translateY(0)
+    }
+    40% {
+        -webkit-transform: translateY(-30px)
+    }
+    50% {
+        -webkit-transform: translateY(0)
+    }
+    60% {
+        -webkit-transform: translateY(-15px)
+    }
+    80% {
+        -webkit-transform: translateY(0)
+    }
+    100% {
+        -webkit-transform: translateY(0)
+    }
+}
+@keyframes jump {
+    0% {
+        transform: translateY(0)
+    }
+    20% {
+        transform: translateY(0)
+    }
+    40% {
+        transform: translateY(-30px)
+    }
+    50% {
+        transform: translateY(0)
+    }
+    60% {
+        transform: translateY(-15px)
+    }
+    80% {
+        transform: translateY(0)
+    }
+    100% {
+        transform: translateY(0)
+    }
+}
+#rocketapp-button.rocketapp-button-float {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    height: 60px;
+    width: 60px;
+    right: 20px;
+    bottom: 20px
+}
+#rocketapp-button.rocketapp-button-float.rocketapp-animatable .rocketapp-button-icon {
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    -webkit-transition-property: visibility, opacity;
+    -moz-transition-property: visibility, opacity;
+    -o-transition-property: visibility, opacity;
+    transition-property: visibility, opacity
+}
+#rocketapp-button.rocketapp-button-float.rocketapp-animatable .rocketapp-button-icon-close {
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    -webkit-transition-property: visibility, opacity;
+    -moz-transition-property: visibility, opacity;
+    -o-transition-property: visibility, opacity;
+    transition-property: visibility, opacity
+}
+#rocketapp-button.rocketapp-button-float .rocketapp-button-icon-close {
+    display: block;
+    visibility: hidden;
+    opacity: 0
+}
+#rocketapp-button.rocketapp-button-float.rocketapp-widget-opened {
+    visibility: visible;
+    opacity: 1
+}
+#rocketapp-button.rocketapp-button-float.rocketapp-widget-opened .rocketapp-button-icon-close {
+    visibility: visible;
+    opacity: 1
+}
+#rocketapp-button.rocketapp-button-float.rocketapp-widget-opened .rocketapp-button-icon {
+    visibility: hidden;
+    opacity: 0
+}
+#rocketapp-button.rocketapp-button-float.rocketapp-widget-opened.rocketapp-animatable .rocketapp-button-icon {
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    -webkit-transition-property: visibility, opacity;
+    -moz-transition-property: visibility, opacity;
+    -o-transition-property: visibility, opacity;
+    transition-property: visibility, opacity
+}
+#rocketapp-button.rocketapp-button-float.rocketapp-widget-opened.rocketapp-animatable .rocketapp-button-icon-close {
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out;
+    -webkit-transition-property: visibility, opacity;
+    -moz-transition-property: visibility, opacity;
+    -o-transition-property: visibility, opacity;
+    transition-property: visibility, opacity
+}
+@media (max-width: 767px) {
+    #rocketapp-button.rocketapp-button-float {
+        left: inherit;
+        right: 20px
+    }
+}
+#rocketapp-button.rocketapp-button-float .rocketapp-button-title {
+    display: none
+}
+#rocketapp-button.rocketapp-button-float .rocketapp-button-icon,
+#rocketapp-button.rocketapp-button-float .rocketapp-button-icon-close {
+    width: 60px;
+    height: 60px;
+    text-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+#rocketapp-button.rocketapp-button-float .rocketapp-button-notification {
+    top: -2px;
+    right: -2px
+}
+@media (max-width: 767px) {
+    #rocketapp-button:not(.rocketapp-button-float) {
+        left: 0;
+        right: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        padding: 0
+    }
+}
+@media (max-width: 1024px) {
+    #rocketapp-button {
+        font-size: 120%
+    }
+}
+#rocketapp-button .rocketapp-button-icon-close {
+    display: none;
+    visibility: hidden;
+    opacity: 0
+}
+#rocketapp-button .rocketapp-button-title {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    padding: 0 10px 0 32px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: none
+}
+@media (max-width: 1024px) {
+    #rocketapp-button .rocketapp-button-title {
+        height: 50px;
+        line-height: 50px
+    }
+}
+@media (max-width: 767px) {
+    #rocketapp-button .rocketapp-button-title {
+        padding: 0 10px 0 36px
+    }
+}
+#rocketapp-button .rocketapp-button-icon {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%
+}
+@media (max-width: 1024px) {
+    #rocketapp-button .rocketapp-button-icon {
+        top: 10px
+    }
+}
+@media (max-width: 767px) {
+    #rocketapp-button .rocketapp-button-icon {
+        left: 2px
+    }
+}
+#rocketapp-button .rocketapp-button-notification {
+    background: #e74237;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    text-align: center;
+    display: none
+}
+#rocketapp-widget {
+    font: normal 14px Tahoma, Verdana, Sans-Serif;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    border: 0 solid rgba(0, 0, 0, 0);
+    position: fixed;
+    right: 20px;
+    bottom: 0;
+    z-index: 2147483647;
+    -webkit-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 320px;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0
+}
+#rocketapp-widget html,
+#rocketapp-widget div,
+#rocketapp-widget span,
+#rocketapp-widget object,
+#rocketapp-widget iframe,
+#rocketapp-widget h1,
+#rocketapp-widget h2,
+#rocketapp-widget h3,
+#rocketapp-widget h4,
+#rocketapp-widget h5,
+#rocketapp-widget h6,
+#rocketapp-widget p,
+#rocketapp-widget blockquote,
+#rocketapp-widget pre,
+#rocketapp-widget abbr,
+#rocketapp-widget address,
+#rocketapp-widget cite,
+#rocketapp-widget code,
+#rocketapp-widget del,
+#rocketapp-widget dfn,
+#rocketapp-widget em,
+#rocketapp-widget img,
+#rocketapp-widget ins,
+#rocketapp-widget kbd,
+#rocketapp-widget q,
+#rocketapp-widget samp,
+#rocketapp-widget small,
+#rocketapp-widget strong,
+#rocketapp-widget sub,
+#rocketapp-widget sup,
+#rocketapp-widget var,
+#rocketapp-widget b,
+#rocketapp-widget i,
+#rocketapp-widget dl,
+#rocketapp-widget dt,
+#rocketapp-widget dd,
+#rocketapp-widget ol,
+#rocketapp-widget ul,
+#rocketapp-widget li,
+#rocketapp-widget fieldset,
+#rocketapp-widget form,
+#rocketapp-widget label,
+#rocketapp-widget legend,
+#rocketapp-widget table,
+#rocketapp-widget caption,
+#rocketapp-widget tbody,
+#rocketapp-widget tfoot,
+#rocketapp-widget thead,
+#rocketapp-widget tr,
+#rocketapp-widget th,
+#rocketapp-widget td,
+#rocketapp-widget article,
+#rocketapp-widget aside,
+#rocketapp-widget figure,
+#rocketapp-widget footer,
+#rocketapp-widget header,
+#rocketapp-widget menu,
+#rocketapp-widget nav,
+#rocketapp-widget section,
+#rocketapp-widget time,
+#rocketapp-widget mark,
+#rocketapp-widget audio,
+#rocketapp-widget video,
+#rocketapp-widget details,
+#rocketapp-widget summary {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-weight: normal;
+    vertical-align: baseline;
+    background: transparent;
+    float: inherit;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none
+}
+#rocketapp-widget main,
+#rocketapp-widget article,
+#rocketapp-widget aside,
+#rocketapp-widget figure,
+#rocketapp-widget footer,
+#rocketapp-widget header,
+#rocketapp-widget nav,
+#rocketapp-widget section,
+#rocketapp-widget details,
+#rocketapp-widget summary {
+    display: block
+}
+#rocketapp-widget html {
+    box-sizing: border-box
+}
+#rocketapp-widget *,
+#rocketapp-widget *:before,
+#rocketapp-widget *:after {
+    box-sizing: inherit
+}
+#rocketapp-widget img,
+#rocketapp-widget object,
+#rocketapp-widget embed {
+    max-width: 100%
+}
+#rocketapp-widget html {
+    overflow-y: scroll
+}
+#rocketapp-widget ul {
+    list-style: none
+}
+#rocketapp-widget blockquote,
+#rocketapp-widget q {
+    quotes: none
+}
+#rocketapp-widget blockquote:before,
+#rocketapp-widget blockquote:after,
+#rocketapp-widget q:before,
+#rocketapp-widget q:after {
+    content: "";
+    content: none
+}
+#rocketapp-widget a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent
+}
+#rocketapp-widget del {
+    text-decoration: line-through
+}
+#rocketapp-widget abbr[title],
+#rocketapp-widget dfn[title] {
+    border-bottom: 1px dotted #000;
+    cursor: help
+}
+#rocketapp-widget table {
+    border-collapse: separate;
+    border-spacing: 0
+}
+#rocketapp-widget th {
+    font-weight: bold;
+    vertical-align: bottom
+}
+#rocketapp-widget td {
+    font-weight: normal;
+    vertical-align: top
+}
+#rocketapp-widget hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0
+}
+#rocketapp-widget input,
+#rocketapp-widget select {
+    vertical-align: middle
+}
+#rocketapp-widget pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    white-space: pre-line;
+    word-wrap: break-word
+}
+#rocketapp-widget input[type="radio"] {
+    vertical-align: text-bottom
+}
+#rocketapp-widget select,
+#rocketapp-widget input,
+#rocketapp-widget textarea {
+    font: 99% sans-serif
+}
+#rocketapp-widget table {
+    font-size: inherit;
+    font: 100%
+}
+#rocketapp-widget small {
+    font-size: 85%
+}
+#rocketapp-widget strong {
+    font-weight: bold
+}
+#rocketapp-widget td,
+#rocketapp-widget td img {
+    vertical-align: top
+}
+#rocketapp-widget sub,
+#rocketapp-widget sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative
+}
+#rocketapp-widget sup {
+    top: -0.5em
+}
+#rocketapp-widget sub {
+    bottom: -0.25em
+}
+#rocketapp-widget pre,
+#rocketapp-widget code,
+#rocketapp-widget kbd,
+#rocketapp-widget samp {
+    font-family: monospace, sans-serif
+}
+#rocketapp-widget .clickable,
+#rocketapp-widget label,
+#rocketapp-widget input[type=button],
+#rocketapp-widget input[type=submit],
+#rocketapp-widget input[type=file],
+#rocketapp-widget button {
+    cursor: pointer
+}
+#rocketapp-widget button,
+#rocketapp-widget input,
+#rocketapp-widget select,
+#rocketapp-widget textarea {
+    margin: 0
+}
+#rocketapp-widget.rocketapp-widget-opened {
+    visibility: visible;
+    opacity: 1
+}
+@media (min-width: 768px) {
+    #rocketapp-widget.rocketapp-animatable:not(.rocketapp-widget-fullheight) {
+        max-height: 0;
+        -webkit-transition: all .2s ease-in;
+        -moz-transition: all .2s ease-in;
+        -o-transition: all .2s ease-in;
+        transition: all .2s ease-in;
+        -webkit-transition-property: visibility, opacity, max-height;
+        -moz-transition-property: visibility, opacity, max-height;
+        -o-transition-property: visibility, opacity, max-height;
+        transition-property: visibility, opacity, max-height
+    }
+    #rocketapp-widget.rocketapp-animatable.rocketapp-widget-fullheight {
+        max-width: 0;
+        -webkit-transition: all .2s ease-in;
+        -moz-transition: all .2s ease-in;
+        -o-transition: all .2s ease-in;
+        transition: all .2s ease-in;
+        -webkit-transition-property: visibility, opacity, max-width;
+        -moz-transition-property: visibility, opacity, max-width;
+        -o-transition-property: visibility, opacity, max-width;
+        transition-property: visibility, opacity, max-width
+    }
+    #rocketapp-widget.rocketapp-animatable.rocketapp-widget-opened {
+        max-height: 410px;
+        -webkit-transition: all .2s ease-out;
+        -moz-transition: all .2s ease-out;
+        -o-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+        -webkit-transition-property: visibility, opacity, max-height;
+        -moz-transition-property: visibility, opacity, max-height;
+        -o-transition-property: visibility, opacity, max-height;
+        transition-property: visibility, opacity, max-height
+    }
+    #rocketapp-widget.rocketapp-animatable.rocketapp-widget-opened.rocketapp-widget-fullheight {
+        max-height: inherit;
+        max-width: 320px;
+        -webkit-transition: all .2s ease-out;
+        -moz-transition: all .2s ease-out;
+        -o-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+        -webkit-transition-property: visibility, opacity, max-width;
+        -moz-transition-property: visibility, opacity, max-width;
+        -o-transition-property: visibility, opacity, max-width;
+        transition-property: visibility, opacity, max-width
+    }
+    #rocketapp-widget.rocketapp-button-float:not(.rocketapp-widget-fullheight) {
+        bottom: 95px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px
+    }
+    #rocketapp-widget.rocketapp-button-float:not(.rocketapp-widget-fullheight) .rocketapp-widget-title {
+        -webkit-border-radius: 8px 8px 0 0;
+        -moz-border-radius: 8px 8px 0 0;
+        border-radius: 8px 8px 0 0
+    }
+    #rocketapp-widget.rocketapp-button-float:not(.rocketapp-widget-fullheight) .rocketapp-widget-content {
+        -webkit-border-radius: 0 0 8px 8px;
+        -moz-border-radius: 0 0 8px 8px;
+        border-radius: 0 0 8px 8px
+    }
+    #rocketapp-widget.rocketapp-button-float:not(.rocketapp-widget-fullheight).rocketapp-animatable {
+        max-width: 0;
+        -webkit-transition: all .2s ease-in;
+        -moz-transition: all .2s ease-in;
+        -o-transition: all .2s ease-in;
+        transition: all .2s ease-in;
+        -webkit-transition-property: visibility, opacity, max-height, max-width;
+        -moz-transition-property: visibility, opacity, max-height, max-width;
+        -o-transition-property: visibility, opacity, max-height, max-width;
+        transition-property: visibility, opacity, max-height, max-width
+    }
+    #rocketapp-widget.rocketapp-button-float:not(.rocketapp-widget-fullheight).rocketapp-animatable.rocketapp-widget-opened {
+        max-width: 320px;
+        -webkit-transition: all .2s ease-out;
+        -moz-transition: all .2s ease-out;
+        -o-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+        -webkit-transition-property: visibility, opacity, max-height, max-width;
+        -moz-transition-property: visibility, opacity, max-height, max-width;
+        -o-transition-property: visibility, opacity, max-height, max-width;
+        transition-property: visibility, opacity, max-height, max-width
+    }
+    #rocketapp-widget:not(.rocketapp-widget-fullheight) .rocketapp-widget-title {
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0
+    }
+}
+@media (max-width: 767px) {
+    #rocketapp-widget {
+        left: 0;
+        right: 0;
+        width: inherit
+    }
+    #rocketapp-widget.rocketapp-animatable {
+        -webkit-transition: all .2s ease-in;
+        -moz-transition: all .2s ease-in;
+        -o-transition: all .2s ease-in;
+        transition: all .2s ease-in;
+        -webkit-transition-property: visibility, opacity;
+        -moz-transition-property: visibility, opacity;
+        -o-transition-property: visibility, opacity;
+        transition-property: visibility, opacity
+    }
+    #rocketapp-widget.rocketapp-animatable.rocketapp-widget-opened {
+        -webkit-transition: all .2s ease-out;
+        -moz-transition: all .2s ease-out;
+        -o-transition: all .2s ease-out;
+        transition: all .2s ease-out;
+        -webkit-transition-property: visibility, opacity;
+        -moz-transition-property: visibility, opacity;
+        -o-transition-property: visibility, opacity;
+        transition-property: visibility, opacity
+    }
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget {
+        font-size: 110%;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        -webkit-animation: bugfix infinite 1s
+    }
+    @-webkit-keyframes bugfix {
+        from {
+            padding: 0
+        }
+        to {
+            padding: 0
+        }
+    }
+}
+#rocketapp-widget .rocketapp-widget-title {
+    background: #15cc51;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    padding: 0 30px 0 30px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 20
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-title {
+        height: 50px;
+        line-height: 50px
+    }
+}
+#rocketapp-widget .rocketapp-widget-content {
+    background: white;
+    height: 370px;
+    -webkit-box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, 0.5)
+}
+#rocketapp-widget .rocketapp-widget-messages {
+    padding: 5px 12px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    top: 40px;
+    bottom: 64px;
+    left: 0;
+    right: 0;
+    z-index: 10
+}
+#rocketapp-widget .rocketapp-widget-messages>div {
+    max-width: 70%;
+    word-wrap: break-word;
+    margin-bottom: 5px;
+    padding: 10px 14px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    -moz-opacity: .95;
+    -khtml-opacity: .95;
+    opacity: .95;
+    margin-left: 38px
+}
+#rocketapp-widget .rocketapp-widget-messages>div>img.rocketapp-widget-message-avatar {
+    width: 40px;
+    max-width: 40px;
+    height: auto;
+    position: absolute;
+    left: -44px;
+    bottom: -2px;
+    z-index: 10;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px
+}
+#rocketapp-widget .rocketapp-widget-messages>div img.rocketapp-widget-message-photo {
+    margin: 2px 0;
+    height: 150px;
+    width: 150px;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 150px;
+    max-height: 150px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: white;
+    display: block
+}
+#rocketapp-widget .rocketapp-widget-messages>div img.rocketapp-widget-message-file {
+    margin: 2px 0;
+    height: 50px;
+    width: 50px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: white;
+    display: block
+}
+#rocketapp-widget .rocketapp-widget-messages>div>div {
+    max-width: 100%
+}
+#rocketapp-widget .rocketapp-widget-messages>div>div a {
+    text-decoration: underline
+}
+#rocketapp-widget .rocketapp-widget-messages>.rocketapp-widget-message-from-agent {
+    margin-top: 18px
+}
+#rocketapp-widget .rocketapp-widget-messages>.rocketapp-widget-message-from-agent.no-agent-name {
+    margin-top: 0
+}
+#rocketapp-widget .rocketapp-widget-messages div span {
+    position: absolute;
+    top: -18px;
+    left: 2px;
+    color: #a4a3a8;
+    font-size: 14px;
+    width: 240px
+}
+@media (max-width: 767px) {
+    #rocketapp-widget .rocketapp-widget-messages {
+        top: 110px;
+        bottom: 25px
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-messages {
+        top: 50px;
+        bottom: 70px
+    }
+}
+#rocketapp-widget .rocketapp-widget-message-from-visitor {
+    position: relative;
+    color: black;
+    background: #E5E5EA;
+    float: right;
+    clear: both
+}
+#rocketapp-widget .rocketapp-widget-message-from-visitor a,
+#rocketapp-widget .rocketapp-widget-message-from-visitor a:hover,
+#rocketapp-widget .rocketapp-widget-message-from-visitor a:focus,
+#rocketapp-widget .rocketapp-widget-message-from-visitor a:active,
+#rocketapp-widget .rocketapp-widget-message-from-visitor a:visited {
+    color: black
+}
+#rocketapp-widget .rocketapp-widget-message-from-visitor:before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    right: -7px;
+    height: 20px;
+    color: #E5E5EA;
+    border-right: 20px solid #E5E5EA;
+    border-bottom-left-radius: 16px 14px;
+    -webkit-transform: translateX(0) translateY(-2px);
+    -moz-transform: translateX(0) translateY(-2px);
+    transform: translateX(0) translateY(-2px)
+}
+#rocketapp-widget .rocketapp-widget-message-from-visitor:after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    right: -56px;
+    width: 26px;
+    height: 20px;
+    background: white;
+    border-bottom-left-radius: 10px;
+    -webkit-transform: translateX(-30px) translateY(-2px);
+    -moz-transform: translateX(-30px) translateY(-2px);
+    transform: translateX(-30px) translateY(-2px)
+}
+#rocketapp-widget .rocketapp-widget-message-from-agent {
+    position: relative;
+    background: #15cc51;
+    color: white;
+    float: left;
+    clear: both
+}
+#rocketapp-widget .rocketapp-widget-message-from-agent a,
+#rocketapp-widget .rocketapp-widget-message-from-agent a:hover,
+#rocketapp-widget .rocketapp-widget-message-from-agent a:focus,
+#rocketapp-widget .rocketapp-widget-message-from-agent a:active,
+#rocketapp-widget .rocketapp-widget-message-from-agent a:visited {
+    color: white
+}
+#rocketapp-widget .rocketapp-widget-message-from-agent:before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: -7px;
+    height: 20px;
+    border-left: 20px solid #15cc51;
+    border-bottom-right-radius: 16px 14px;
+    -webkit-transform: translateX(0) translateY(-2px);
+    -moz-transform: translateX(0) translateY(-2px);
+    transform: translateX(0) translateY(-2px)
+}
+#rocketapp-widget .rocketapp-widget-message-from-agent:after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 4px;
+    width: 26px;
+    height: 20px;
+    background: white;
+    color: #15cc51;
+    border-bottom-right-radius: 10px;
+    -webkit-transform: translateX(-30px) translateY(-2px);
+    -moz-transform: translateX(-30px) translateY(-2px);
+    transform: translateX(-30px) translateY(-2px)
+}
+#rocketapp-widget .rocketapp-widget-input-container {
+    padding: 0 10px;
+    position: absolute;
+    bottom: 23px;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 20
+}
+@media (max-width: 767px) {
+    #rocketapp-widget .rocketapp-widget-input-container {
+        top: 60px;
+        bottom: inherit
+    }
+}
+#rocketapp-widget .rocketapp-widget-input {
+    padding: 5px 10px;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    resize: none;
+    border-color: #15cc51 !important;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: black;
+    min-height: inherit;
+    width: 100% !important;
+    height: inherit;
+    text-transform: none;
+    background: inherit
+}
+#rocketapp-widget .rocketapp-widget-input:focus {
+    outline: none;
+    -webkit-box-shadow: 0 0 12px -3px #15cc51;
+    -moz-box-shadow: 0 0 12px -3px #15cc51;
+    box-shadow: 0 0 12px -3px #15cc51
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-input {
+        font-size: 110%
+    }
+}
+#rocketapp-widget .rocketapp-widget-input-message {
+    padding: 10px 64px 12px 10px;
+    height: 38px;
+    overflow-y: hidden
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-input-message {
+        height: 42px
+    }
+}
+#rocketapp-widget .rocketapp-widget-file-input {
+    display: none
+}
+#rocketapp-widget .rocketapp-widget-file-input-btn,
+#rocketapp-widget .rocketapp-widget-screenshot-btn,
+#rocketapp-widget .rocketapp-widget-send-icon-btn {
+    width: 24px;
+    height: 38px;
+    position: absolute;
+    bottom: 4px;
+    padding: 10px 2px;
+    cursor: pointer;
+    z-index: 10;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+#rocketapp-widget .rocketapp-widget-file-input-btn>img,
+#rocketapp-widget .rocketapp-widget-screenshot-btn>img,
+#rocketapp-widget .rocketapp-widget-send-icon-btn>img {
+    width: 100%
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-file-input-btn,
+    #rocketapp-widget .rocketapp-widget-screenshot-btn,
+    #rocketapp-widget .rocketapp-widget-send-icon-btn {
+        height: 42px;
+        padding: 12px 2px
+    }
+}
+#rocketapp-widget.rocketapp-offline .rocketapp-widget-file-input-btn,
+#rocketapp-widget.rocketapp-offline .rocketapp-widget-screenshot-btn {
+    top: 70px
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget.rocketapp-offline .rocketapp-widget-file-input-btn,
+    #rocketapp-widget.rocketapp-offline .rocketapp-widget-screenshot-btn {
+        top: 76px
+    }
+}
+#rocketapp-widget.rocketapp-offline .rocketapp-widget-input-message {
+    height: 230px
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget.rocketapp-offline .rocketapp-widget-input-message {
+        height: 210px
+    }
+}
+#rocketapp-widget .rocketapp-widget-file-input-btn {
+    right: 16px
+}
+#rocketapp-widget .rocketapp-widget-screenshot-btn {
+    right: 46px
+}
+#rocketapp-widget .rocketapp-widget-send-icon-btn {
+    right: 16px;
+    display: none
+}
+#rocketapp-widget a.rocketapp-widget-footer img {
+    height: 16px;
+    margin-left: 2px
+}
+#rocketapp-widget .rocketapp-widget-notification {
+    background: #e74237;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    text-align: center;
+    z-index: 20;
+    display: none
+}
+#rocketapp-widget.rocketapp-button-float .rocketapp-widget-notification {
+    top: -2px;
+    right: -2px
+}
+#rocketapp-widget .rocketapp-icon {
+    width: 32px;
+    position: absolute;
+    top: 0;
+    left: 0
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-icon {
+        top: 17px;
+        left: 7px
+    }
+}
+#rocketapp-widget .rocketapp-widget-close-btn {
+    width: 14px;
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    cursor: pointer;
+    z-index: 20
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-close-btn {
+        top: 20px;
+        right: 11px;
+        width: 16px
+    }
+}
+#rocketapp-widget .rocketapp-widget-input-name,
+#rocketapp-widget .rocketapp-widget-input-email {
+    margin-top: 5px !important
+}
+#rocketapp-widget .rocketapp-widget-input-email {
+    margin: 5px 0 !important
+}
+#rocketapp-widget .rocketapp-widget-settings-btn {
+    width: 16px;
+    position: absolute;
+    top: 5px;
+    left: 2px;
+    padding: 8px;
+    z-index: 20;
+    cursor: pointer;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-settings-btn {
+        top: -1px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        width: 18px
+    }
+}
+#rocketapp-widget .rocketapp-widget-settings-container {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 5555;
+    -webkit-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+    background: white;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    -webkit-transition: all .1s ease-in;
+    -moz-transition: all .1s ease-in;
+    -o-transition: all .1s ease-in;
+    transition: all .1s ease-in;
+    -webkit-transition-property: visibility, opacity, max-height;
+    -moz-transition-property: visibility, opacity, max-height;
+    -o-transition-property: visibility, opacity, max-height;
+    transition-property: visibility, opacity, max-height
+}
+#rocketapp-widget .rocketapp-widget-settings-container.rocketapp-widget-opened {
+    visibility: visible;
+    opacity: 1;
+    max-height: 126px;
+    -webkit-transition: all .1s ease-out;
+    -moz-transition: all .1s ease-out;
+    -o-transition: all .1s ease-out;
+    transition: all .1s ease-out;
+    -webkit-transition-property: visibility, opacity, max-height;
+    -moz-transition-property: visibility, opacity, max-height;
+    -o-transition-property: visibility, opacity, max-height;
+    transition-property: visibility, opacity, max-height
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-settings-container.rocketapp-widget-opened {
+        max-height: 136px
+    }
+}
+#rocketapp-widget .rocketapp-widget-settings-container form {
+    padding: 5px 10px;
+    width: initial
+}
+#rocketapp-widget .rocketapp-widget-settings-container form .rocketapp-widget-input {
+    margin: 5px 0
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-settings-container {
+        top: 50px
+    }
+}
+#rocketapp-widget .rocketapp-widget-login-btn,
+#rocketapp-widget .rocketapp-widget-send-btn {
+    background: #15cc51;
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+    width: 100%;
+    padding: 7px;
+    border-width: 0;
+    border-style: solid;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: white;
+    margin: 5px 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    height: inherit;
+    box-sizing: border-box
+}
+@media (max-width: 1024px) {
+    #rocketapp-widget .rocketapp-widget-login-btn,
+    #rocketapp-widget .rocketapp-widget-send-btn {
+        font-size: 120%
+    }
+}
+#rocketapp-widget .rocketapp-widget-login-btn,
+#rocketapp-widget .rocketapp-widget-send-btn:hover {
+    -moz-opacity: .97;
+    -khtml-opacity: .97;
+    opacity: .97
+}
+#rocketapp-widget .rocketapp-widget-login-btn,
+#rocketapp-widget .rocketapp-widget-send-btn:focus {
+    outline: none
+}
+#rocketapp-widget.rocketapp-widget-fullheight {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    right: 0
+}
+#rocketapp-widget.rocketapp-widget-fullheight .rocketapp-widget-content {
+    width: 368px
+}
+#rocketapp-widget .rocketapp-widget-typing-indicator {
+    background: #15cc51;
+    width: auto;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    padding: 12px;
+    display: table;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 70px;
+    left: 20px;
+    -moz-opacity: .95;
+    -khtml-opacity: .95;
+    opacity: .95;
+    display: none
+}
+#rocketapp-widget .rocketapp-widget-typing-indicator:before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: -7px;
+    height: 18px;
+    border-left: 20px solid #15cc51;
+    border-bottom-right-radius: 16px 14px;
+    -webkit-transform: translateX(0) translateY(-2px);
+    -moz-transform: translateX(0) translateY(-2px);
+    transform: translateX(0) translateY(-2px)
+}
+#rocketapp-widget .rocketapp-widget-typing-indicator:after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 18px;
+    width: 12px;
+    height: 20px;
+    background: white;
+    border-bottom-right-radius: 10px;
+    -webkit-transform: translateX(-30px) translateY(-2px);
+    -moz-transform: translateX(-30px) translateY(-2px);
+    transform: translateX(-30px) translateY(-2px)
+}
+#rocketapp-widget .rocketapp-widget-typing-indicator span {
+    height: 10px;
+    width: 10px;
+    float: left;
+    margin: 0 1px;
+    background: white;
+    display: block;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -moz-opacity: .4;
+    -khtml-opacity: .4;
+    opacity: .4
+}
+#rocketapp-widget .rocketapp-widget-typing-indicator span:nth-of-type(1) {
+    -webkit-animation: 1s rocketapp-blink infinite .3333s;
+    animation: 1s rocketapp-blink infinite .3333s
+}
+#rocketapp-widget .rocketapp-widget-typing-indicator span:nth-of-type(2) {
+    -webkit-animation: 1s rocketapp-blink infinite .6666s;
+    animation: 1s rocketapp-blink infinite .6666s
+}
+#rocketapp-widget .rocketapp-widget-typing-indicator span:nth-of-type(3) {
+    -webkit-animation: 1s rocketapp-blink infinite .9999s;
+    animation: 1s rocketapp-blink infinite .9999s
+}
+@-webkit-keyframes rocketapp-blink {
+    50% {
+        opacity: 1
+    }
+}
+@keyframes rocketapp-blink {
+    50% {
+        opacity: 1
+    }
+}
+@media (max-width: 767px) {
+    #rocketapp-widget .rocketapp-widget-typing-indicator {
+        bottom: 25px
+    }
+}

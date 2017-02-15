@@ -45,12 +45,21 @@ def listen(request):
         ip = texts[0].strip()
         text = " ".join(texts[1:])
         g = Group.objects.get(grp_id=data["chat"])
+        access = ''
+        for u in User.objects.all():
+            if u.grp.pk == g.pk:
+                access = u.access_token
+                break
         msg = Chat()
         msg.text = text
         msg.by = 1
         msg.grp = g
         msg.ip = ip
         msg.save(force_insert=True)
+        flock_client = FlockClient(token=access, app_id=app_id)
+        send_as_hal = SendAs(name=str(data["userName"]),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+        send_as_message = Message(to=g.grp_id,text=text,send_as=send_as_hal)
+        res = flock_client.send_chat(send_as_message)
         return HttpResponse('{"text": "Reply Sent to User"}')
 
     return HttpResponse('listen')
