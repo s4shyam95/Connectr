@@ -5,6 +5,10 @@ from django.db import models
 # Create your models here.
 
 
+# class IPMan(models.Model):
+#     ip = models.CharField(max_length=512)
+#     name = models.CharField(max_length=512)
+
 
 #Group represents on Company us
 class Group(models.Model):

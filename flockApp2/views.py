@@ -56,6 +56,7 @@ def listen(request):
         msg.grp = g
         msg.ip = ip
         msg.save(force_insert=True)
+        text = "'"+text+"' to " + str(ip)
         flock_client = FlockClient(token=access, app_id=app_id)
         send_as_hal = SendAs(name=str(data["userName"]),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
         send_as_message = Message(to=g.grp_id,text=text,send_as=send_as_hal)

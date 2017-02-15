@@ -751,12 +751,7 @@
     font-size: 14px;
     width: 240px
 }
-@media (max-width: 767px) {
-    #rocketapp-widget .rocketapp-widget-messages {
-        top: 110px;
-        bottom: 25px
-    }
-}
+
 @media (min-width: 768px) and (max-width: 1024px) {
     #rocketapp-widget .rocketapp-widget-messages {
         top: 50px;
@@ -851,12 +846,6 @@
     right: 0;
     background: white;
     z-index: 20
-}
-@media (max-width: 767px) {
-    #rocketapp-widget .rocketapp-widget-input-container {
-        top: 60px;
-        bottom: inherit
-    }
 }
 #rocketapp-widget .rocketapp-widget-input {
     padding: 5px 10px;
