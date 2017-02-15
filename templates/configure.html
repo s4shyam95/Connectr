@@ -5,16 +5,30 @@
 {% endblock %}
 
 {% block body_block %}
-  {% for grp in grps %}
-    <input type="radio" name="options"  data-name="{{ grp.name }}" value="{{ grp.id }}">{{ grp.name }}</input>
-  {% endfor %}
-  <input id="comp-name" type="text" name="company_name" placeholder="Enter your company label">
-  <button id="select-button">Select</button>
-  <!--Code DIV Here-->
-  <div id="show-script" style="display: none;">
-    <!--Well here in that code tag-->
-    &lt;script type=&quot;text/javascript&quot; id=&quot;rocketapp-script&quot; data-attr=&quot;<span id="hash-script"></span>&quot; src=&quot;https://peaceful-hollows-95315.herokuapp.com/static/js/chart.js&quot; &gt;&lt;/script&gt;
-  </div>
+    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
+        {% if live %}
+            <label>Select your group to add live chat to</label>
+              {% for grp in grps %}
+                  <div class="radio">
+                      <label>
+                          <input type="radio" name="options" data-name="{{ grp.name }}" value="{{ grp.id }}">
+                          {{ grp.name }}
+                      </label>
+                  </div>
+              {% endfor %}
+            <div class="form-group">
+                <input type="text" name="company_name" class="form-control" id="comp-name" placeholder="Enter your company label">
+            </div>
+            <button type="submit" id="select-button" class="btn btn-flock btn-block" >Submit</button>
+        {% else %}
+            <div class="alert alert-success" role="alert">Your company {{ grp.company }} has set group at {{ grp.group_name }}</div>
+        {% endif %}
+        <div id="show-script" {% if live %}style="display: none;" {% endif %}>
+            <div class="well">
+                <code> &lt;script type=&quot;text/javascript&quot; id=&quot;rocketapp-script&quot; data-attr=&quot;<span id="hash-script">{% if not live %}{{ grp.grp_id }}{% endif %}</span>&quot; src=&quot;https://peaceful-hollows-95315.herokuapp.com/static/js/chart.js&quot; &gt;&lt;/script&gt;</code>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
@@ -40,4 +54,5 @@
     });
   });
 </script>
+
 {% endblock %}

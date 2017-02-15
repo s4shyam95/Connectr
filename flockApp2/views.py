@@ -90,12 +90,14 @@ def configure(request):
             u.grp = ret[0]
             u.save()
             context['grp'] = ret[0]
-            return render(request,'already.html',context)
+            context['live'] = False
+            return render(request,'configure.html',context)
 
     company_name = (flock_client.get_user_info())['teamId']
     context = {}
     context['grps'] = grps
     context['company_name'] = company_name
+    context['live'] = True
     return render(request,'configure.html',context)
     # return HttpResponse('bullshit' + escape(repr(request)))
 
