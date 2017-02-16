@@ -7,7 +7,7 @@
 {% block body_block %}
     <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
         {% if live %}
-            <label>Select your group to add live chat to</label>
+            <label>Select the Flock Group which will be responsible for the LiveChat.</label>
               {% for grp in grps %}
                   <div class="radio">
                       <label>
@@ -21,7 +21,10 @@
             </div>
             <button type="submit" id="select-button" class="btn btn-flock btn-block" >Submit</button>
         {% else %}
-            <div class="alert alert-success" role="alert">Your company {{ grp.company }} has set group at {{ grp.group_name }}</div>
+            <div class="alert alert-success" role="alert">Your company: {{ grp.company }} has selected Group: {{ grp.group_name }} for LiveChat.
+                 To add chat support, please copy the below snippet on your website.
+                 You can use the Group to chat with the customers on the website using '/reply'.
+            </div>
         {% endif %}
         <div id="show-script" {% if live %}style="display: none;" {% endif %}>
             <div class="well">
