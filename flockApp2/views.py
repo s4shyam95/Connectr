@@ -250,6 +250,9 @@ def handle_key(request):
 def handle_recording(request):
     """Play back the caller's recording."""
     recording_url = request.POST["RecordingUrl"]
+    ll = Log()
+    ll.text = str(request.POST["RecordingUrl"])
+    ll.save(force_insert=True)
     resp = twilio.twiml.Response()
     resp.say("Thanks for howling... take a listen to what you howled.")
     resp.play(recording_url)
