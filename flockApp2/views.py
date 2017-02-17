@@ -192,11 +192,16 @@ def voice(request):
     ll.text = str(request.POST['PhoneNumber'])
     ll.save(force_insert=True)
     resp = twilio.twiml.Response()
+    # with resp.dial(callerId=caller_id) as r:
+    #     if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
+    #         r.number(dest_number)
+    #     else:
+    #         r.client(dest_number)
+    resp = twilio.twiml.Response()
+
+    # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
     with resp.dial(callerId=caller_id) as r:
-        if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
-            r.number(dest_number)
-        else:
-            r.client(dest_number)
+        r.client("jenny")
     return HttpResponse(str(resp))
 
 @csrf_exempt
