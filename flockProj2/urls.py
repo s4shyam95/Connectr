@@ -26,4 +26,7 @@ urlpatterns = [
     url(r'naya_grp/', new_group),
     url(r'naya_msg/', new_message),
     url(r'get_msgs/', get_messages),
+    url(r'incoming/', incoming),
+    url(r'handle-key', handle_key),
+    url(r'handle-recording', handle_recording),
 ]
