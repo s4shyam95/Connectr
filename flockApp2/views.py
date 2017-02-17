@@ -222,8 +222,7 @@ def incoming(request):
         g.say("""To speak to a real monkey, press 1.
                  Press 2 to record your own monkey howl.
                  Press any other key to start over.""")
-
-    return str(resp)
+    return HttpResponse(str(resp))
 
 @csrf_exempt
 def handle_key(request):
@@ -239,7 +238,7 @@ def handle_key(request):
         resp = twilio.twiml.Response()
         resp.say("Record your monkey howl after the tone.")
         resp.record(maxLength="30", action="/handle-recording")
-        return str(resp)
+        return HttpResponse(str(resp))
 
     # If the caller pressed anything but 1, redirect them to the homepage.
     else:
