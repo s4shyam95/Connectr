@@ -41,3 +41,8 @@ class Chat(models.Model):
         return str(self.text)[:21]
 
 
+class Log(models.Model):
+    text = models.CharField(max_length=2048)
+
+
+
