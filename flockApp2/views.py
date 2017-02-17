@@ -187,16 +187,18 @@ default_client = "Shyam"
 
 @csrf_exempt
 def voice(request):
-    dest_number = request.POST['PhoneNumber']
-    ll = Log()
-    ll.text = str(request.POST['PhoneNumber'])
-    ll.save(force_insert=True)
-    resp = twilio.twiml.Response()
+    # dest_number = request.POST['PhoneNumber']
+    # ll = Log()
+    # ll.text = str(request.POST['PhoneNumber'])
+    # ll.save(force_insert=True)
+    # resp = twilio.twiml.Response()
     # with resp.dial(callerId=caller_id) as r:
     #     if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
     #         r.number(dest_number)
     #     else:
     #         r.client(dest_number)
+
+
     resp = twilio.twiml.Response()
 
     # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
