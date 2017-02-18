@@ -286,9 +286,9 @@ def incoming(request):
     resp = twilio.twiml.Response()
     # Greet the caller by name
     # log('wait_'+request.POST.get('From', ''))
-    # resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
-    # resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
-    # resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
     with resp.dial(callerId=caller_id) as r:
         r.client("jenny")
 
