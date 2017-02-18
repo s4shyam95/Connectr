@@ -26,7 +26,7 @@ from django.urls import reverse
 caller_id = "+19172596412 "
 default_client = "Shyam"
 
-from flockProj2.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_DEFAULT_CALLERID, APPLICATION_SID
+from flockProj2.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_DEFAULT_CALLERID, APPLICATION_SID, NGROK_URL
 
 digits_dict = {
     "1": "one",
@@ -330,12 +330,12 @@ def handle_ivr(request):
         connect_sucessful = "You are now connected to " + company.name + "'s " + group_name + " team." + \
                             " Please explain your query in brief after the tone and press hash to finish."
         twilio_response.say(connect_sucessful)
-        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#',
-                               transcribe='true', transcribeCallback='/transcribe_handle')
+         # twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#',
+         #                       transcribe='true', transcribeCallback='/transcribe_handle')
+        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#')
         twilio_response.say(
             "Sorry, we didn't get your recording. Please try again after the tone and press hash to finish.")
-        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#',
-                               transcribe='true', transcribeCallback='/transcribe_handle')
+        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#')
         twilio_response.say("Sorry, we didn't get your recording. Please try again later")
         twilio_response.hangup()
     else:
@@ -508,48 +508,49 @@ def transcribed(request):
 
 
 def save_recording(recording_url, callsid):
-    log("deleting file")
-    try:
-        os.remove('Twilio.wav')
-    except OSError:
-        pass
-    log("downloading begins")
+    # log("deleting file")
+    # try:
+    #     os.remove('Twilio.wav')
+    # except OSError:
+    #     pass
+    # log("downloading begins")
+    #
+    # try:
+    #     # r = requests.get(recording_url, stream=True)
+    #     # if r.status_code == 200:
+    #     # with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
+    #     # # for block in r.iter_content(1024):
+    #     #     # f.write(block)
+    #     #     r.raw.decode_content = True
+    #     #     shutil.copyfileobj(r.raw, f)
+    #     # f.close()
+    #     # # os.system("wget -O Twilio.wav " + recording_url)
+    #     # # time.sleep(5)
+    #     urllib.urlretrieve(recording_url, "Twilio.wav")
+    #     time.sleep(10)
+    # except Exception, e:
+    #     log('t1' + e.message)
+    #
+    # if not os.path.exists('Twilio.wav'):
+    #     log('FUCKCKCKCKCKCKCK')
+    #
+    # log("reco begins")
+    # reco = sr.Recognizer()
+    # text = "prob"
+    # try:
+    #     with sr.AudioFile('Twilio.wav') as source:  # use "test.wav" as the audio source
+    #         audio = reco.record(source)  # extract audio data from the file
+    #     try:
+    #         text = reco.recognize_google(audio, language="en-us", show_all=False)
+    #         log("text is " + str(text))
+    #     except LookupError:  # speech is unintelligible
+    #         text = "Problem understanding"
+    #         log(text)
+    #         # print("Could not understand audio")
+    # except Exception, e:
+    #     log('t2' + e.message)
 
-    try:
-        # r = requests.get(recording_url, stream=True)
-        # if r.status_code == 200:
-        # with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
-        # # for block in r.iter_content(1024):
-        #     # f.write(block)
-        #     r.raw.decode_content = True
-        #     shutil.copyfileobj(r.raw, f)
-        # f.close()
-        # # os.system("wget -O Twilio.wav " + recording_url)
-        # # time.sleep(5)
-        urllib.urlretrieve(recording_url, "Twilio.wav")
-        time.sleep(10)
-    except Exception, e:
-        log('t1' + e.message)
-
-    if not os.path.exists('Twilio.wav'):
-        log('FUCKCKCKCKCKCKCK')
-
-    log("reco begins")
-    reco = sr.Recognizer()
-    text = "prob"
-    try:
-        with sr.AudioFile('Twilio.wav') as source:  # use "test.wav" as the audio source
-            audio = reco.record(source)  # extract audio data from the file
-        try:
-            text = reco.recognize_google(audio, language="en-us", show_all=False)
-            log("text is " + str(text))
-        except LookupError:  # speech is unintelligible
-            text = "Problem understanding"
-            log(text)
-            # print("Could not understand audio")
-    except Exception, e:
-        log('t2' + e.message)
-
+    text = requests.get(NGROK_URL,{'recording_url':recording_url}).text
 
     # send text to flock,
     companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
@@ -580,6 +581,6 @@ def handle_recording(request):
     twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
                             name='wait_')
 
-    # threading.Thread(target=save_recording, args=(recording_url, callsid,)).start()
+    threading.Thread(target=save_recording, args=(recording_url, callsid,)).start()
     return HttpResponse(str(twilio_response))
 
