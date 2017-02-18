@@ -559,6 +559,8 @@ def save_recording(recording_url, callsid, number):
     sidebar_url = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + \
                   r.flock_group.group_id.split(':')[1] + '&number=' + number
 
+    log(sidebar_url)
+
     text_payload = text
     b1 = Button(name = "Claim Ticket", id="1", action=OpenWidgetAction(url=sidebar_url, desktop_type="sidebar"))
     attachment = Attachment(title="Incoming Call", buttons=[b1])
