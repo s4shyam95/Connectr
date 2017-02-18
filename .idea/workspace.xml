@@ -43,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1112" max-vertical-offset="2475">
-              <caret line="172" column="30" selection-start-line="172" selection-start-column="30" selection-end-line="172" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.27977315" vertical-offset="2147" max-vertical-offset="2865">
+              <caret line="362" column="12" selection-start-line="362" selection-start-column="12" selection-end-line="362" selection-end-column="12" />
               <folding>
                 <element signature="e#985#1057#0" expanded="false" />
                 <element signature="e#1142#1336#0" expanded="false" />
@@ -61,11 +61,10 @@
                 <element signature="e#8246#8466#0" expanded="false" />
                 <element signature="e#8509#9173#0" expanded="false" />
                 <element signature="e#9218#11205#0" expanded="false" />
-                <element signature="e#11307#12124#0" expanded="false" />
-                <element signature="e#12173#12613#0" expanded="false" />
-                <element signature="e#12658#13014#0" expanded="false" />
-                <element signature="e#13054#13227#0" expanded="false" />
-                <element signature="e#13278#15595#0" expanded="false" />
+                <element signature="e#12186#12626#0" expanded="false" />
+                <element signature="e#12671#13027#0" expanded="false" />
+                <element signature="e#13067#13240#0" expanded="false" />
+                <element signature="e#13291#15608#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -81,10 +80,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="configure.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="configure.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/configure.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4512195" vertical-offset="2583" max-vertical-offset="3285">
+            <state vertical-scroll-proportion="-9.25" vertical-offset="2583" max-vertical-offset="3285">
               <caret line="187" column="63" selection-start-line="187" selection-start-column="63" selection-end-line="187" selection-end-column="63" />
               <folding>
                 <element signature="n#style#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -108,9 +107,11 @@
       <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.25" vertical-offset="513" max-vertical-offset="1005">
-              <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
-              <folding />
+            <state vertical-scroll-proportion="-19.25" vertical-offset="528" max-vertical-offset="1080">
+              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,13 +157,13 @@
         <option value="$PROJECT_DIR$/flockApp2/admin.py" />
         <option value="$PROJECT_DIR$/flockProj2/settings.py" />
         <option value="$PROJECT_DIR$/flockProj2/urls.py" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/static/css/extra.css" />
         <option value="$PROJECT_DIR$/static/css/navbar.css" />
         <option value="$PROJECT_DIR$/templates/client.html" />
-        <option value="$PROJECT_DIR$/flockApp2/views.py" />
         <option value="$PROJECT_DIR$/static/js/chart.js" />
         <option value="$PROJECT_DIR$/templates/configure.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/flockApp2/views.py" />
       </list>
     </option>
   </component>
@@ -314,7 +315,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="SearchEverywhereHistoryKey" value="wsgi&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="base&#9;FILE&#9;file:///Users/s4shyam95/PycharmProjects/flockProj3/flockProj4/peaceful-hollows-95315/templates/base.html&#10;wsgi&#9;null&#9;null" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="FullScreen" value="true" />
@@ -623,11 +624,10 @@
             <element signature="e#8246#8466#0" expanded="false" />
             <element signature="e#8509#9173#0" expanded="false" />
             <element signature="e#9218#11205#0" expanded="false" />
-            <element signature="e#11307#12124#0" expanded="false" />
-            <element signature="e#12173#12613#0" expanded="false" />
-            <element signature="e#12658#13014#0" expanded="false" />
-            <element signature="e#13054#13227#0" expanded="false" />
-            <element signature="e#13278#15595#0" expanded="false" />
+            <element signature="e#12186#12626#0" expanded="false" />
+            <element signature="e#12671#13027#0" expanded="false" />
+            <element signature="e#13067#13240#0" expanded="false" />
+            <element signature="e#13291#15608#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -722,14 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.25" vertical-offset="513" max-vertical-offset="1005">
-          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/css/extra.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.489603" vertical-offset="17591" max-vertical-offset="18180">
@@ -766,10 +758,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/chart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1254" max-vertical-offset="1830">
+          <caret line="101" column="33" selection-start-line="101" selection-start-column="33" selection-end-line="101" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/configure.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.25" vertical-offset="2583" max-vertical-offset="3285">
+          <caret line="187" column="63" selection-start-line="187" selection-start-column="63" selection-end-line="187" selection-end-column="63" />
+          <folding>
+            <element signature="n#style#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.25" vertical-offset="528" max-vertical-offset="1080">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1112" max-vertical-offset="2475">
-          <caret line="172" column="30" selection-start-line="172" selection-start-column="30" selection-end-line="172" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.27977315" vertical-offset="2147" max-vertical-offset="2865">
+          <caret line="362" column="12" selection-start-line="362" selection-start-column="12" selection-end-line="362" selection-end-column="12" />
           <folding>
             <element signature="e#985#1057#0" expanded="false" />
             <element signature="e#1142#1336#0" expanded="false" />
@@ -783,31 +805,10 @@
             <element signature="e#8246#8466#0" expanded="false" />
             <element signature="e#8509#9173#0" expanded="false" />
             <element signature="e#9218#11205#0" expanded="false" />
-            <element signature="e#11307#12124#0" expanded="false" />
-            <element signature="e#12173#12613#0" expanded="false" />
-            <element signature="e#12658#13014#0" expanded="false" />
-            <element signature="e#13054#13227#0" expanded="false" />
-            <element signature="e#13278#15595#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/chart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1254" max-vertical-offset="1830">
-          <caret line="101" column="33" selection-start-line="101" selection-start-column="33" selection-end-line="101" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/configure.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4512195" vertical-offset="2583" max-vertical-offset="3285">
-          <caret line="187" column="63" selection-start-line="187" selection-start-column="63" selection-end-line="187" selection-end-column="63" />
-          <folding>
-            <element signature="n#style#0;n#div#3;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#12186#12626#0" expanded="false" />
+            <element signature="e#12671#13027#0" expanded="false" />
+            <element signature="e#13067#13240#0" expanded="false" />
+            <element signature="e#13291#15608#0" expanded="false" />
           </folding>
         </state>
       </provider>
