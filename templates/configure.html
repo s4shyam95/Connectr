@@ -186,8 +186,8 @@
                     method: "POST",
                     data : {
                         interation : selected,
-                        team_id: {{ company_name }},
-                        access_token: {{ access_token }},
+                        team_id: "{{ company_name }}",
+                        access_token: "{{ access_token }}",
                         company_name: $('#comp-call').val()
                     },
                     success: function (result) {
