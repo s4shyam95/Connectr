@@ -97,7 +97,7 @@
         var minutes = (parseInt(t / 60));
         $('.minutes').text((minutes).toLocaleString(undefined, {minimumIntegerDigits: 2}));
         $('.seconds').text((seconds).toLocaleString(undefined, {minimumIntegerDigits: 2}));
-        timer = setTimeout(setTimer, 200);
+        timer = setTimeout(setTimer, 1000);
         if (t > 59) {
             if (t % 60 == 0) {
                 $(".timer").addClass("progress-60");
