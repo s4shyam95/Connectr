@@ -99,7 +99,7 @@ $(document).ready(function () {
                 url: "https://peaceful-hollows-95315.herokuapp.com/naya_msg/",
                 data: {
                     text: $(".rocketapp-widget-input-message").val(),
-                    grp_id: token,
+                    grp_id: token
                 },
                 success: function(result) {
                     var divToAdd = addMessage($(".rocketapp-widget-input-message").val(),2);

@@ -157,7 +157,7 @@
             var $new = '<div class="number-rows input-group col-xs-12"><span class="input-group-addon">Press</span><select class="select form-control select-number" style="width: 100%;"><option disabled="disabled" selected>---</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>0</option></select><span class="input-group-addon">for</span><select class="select form-control select-group"><option disabled="disabled" selected>---</option>{% for grp in grps %}<option value="{{ grp.id }}">{{ grp.name }}</option>{% endfor %}</select><span class="input-group-btn"><button class="btn btn-danger delete-row" type="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></span></div>';
             $('.select').select2({
                 theme: 'bootstrap',
-                minimumResultsForSearch: Infinity,
+                minimumResultsForSearch: Infinity
             });
 
             $('.delete-row').click(deleteFunc);
@@ -167,7 +167,7 @@
                 $('.delete-row').click(deleteFunc);
                 $('.select').select2({
                     theme: 'bootstrap',
-                    minimumResultsForSearch: Infinity,
+                    minimumResultsForSearch: Infinity
                 });
             });
 
@@ -185,7 +185,7 @@
                     url: '/save_interactions/',
                     method: "POST",
                     data : {
-                        interation : selected,
+                        interactions : selected,
                         team_id: "{{ company_name }}",
                         access_token: "{{ access_token }}",
                         company_name: $('#comp-call').val()
