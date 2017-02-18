@@ -134,7 +134,8 @@
                 url: '/callupdate/',
                 method: "POST",
                 data: {
-                    callsid: query_string["callsid"]
+                    callsid: query_string["callsid"],
+                    group_id: "{{ group_id }}"
                 },
                 success: function (result) {
                     console.log(result);

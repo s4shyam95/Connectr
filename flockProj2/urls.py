@@ -33,5 +33,5 @@ urlpatterns = [
     url(r'handle_ivr/?', handle_ivr),
     url(r'save_interactions/?', save_interactions),
     url(r'claim_call/?', incomingWidget),
-    url(r'callrecording/?', callrecording)
+    url(r'callrecording/(?P<group>\w+)/??', callrecording)
 ]

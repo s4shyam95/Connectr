@@ -381,6 +381,7 @@ def save_interactions(request):
 @csrf_exempt
 def incomingWidget(request):
     callsid = request.GET['callsid']
+    group_id = request.GET['group_id']
     account_sid = TWILIO_ACCOUNT_SID
     auth_token = TWILIO_AUTH_TOKEN
     capability = TwilioCapability(account_sid, auth_token)
@@ -389,6 +390,7 @@ def incomingWidget(request):
     token = capability.generate()
     context_dict = {}
     context_dict['token'] = token
+    context_dict['group_id'] = group_id
 
     # TODO
     # change this to incoming call
@@ -398,12 +400,15 @@ def incomingWidget(request):
 @csrf_exempt
 def callupdate(request):
     callsid = request.POST['callsid']
+    group_id = request.POST['group_id']
     account_sid = TWILIO_ACCOUNT_SID
     auth_token = TWILIO_AUTH_TOKEN
     client = TwilioRestClient(account_sid, auth_token)
+    gimme_url = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + group_id
+    log(gimme_url)
     call = client.calls.update(
         callsid,
-        url="https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid,
+        url=gimme_url,
         method="POST")
     return HttpResponse(str(call.to))
 
@@ -412,41 +417,41 @@ def callupdate(request):
 def gimme(request):
     resp = twilio.twiml.Response()
     callsid = request.GET['callsid']
+    group_id = request.POST['group_id']
     resp.say('This call will be recorded for training purposes.')
-    with resp.dial(callerId=caller_id, record="record-from-answer-dual", action="/callrecording/") as r:
+    with resp.dial(callerId=caller_id, record="record-from-answer-dual",
+                   action="/callrecording/" + group_id + "/") as r:
         r.client(callsid)
     return HttpResponse(str(resp))
 
 
 @csrf_exempt
-def callrecording(request):
+def callrecording(request, group='ERROR'):
+    log(group)
     url = request.POST['RecordingUrl']
     d = Download(src="http://wallpapercave.com/wp/H630T6R.jpg")
     views = Views()
     views.add_flockml("<flockml>Download the <i>Audio Recording</i></flockml>")
-
     callsid = request.POST['CallSid']
-    lis = MobUser.objects.all().order_by('pk')
-    mu = lis[len(lis)-1]
-    intr = mu.iteraction
-
-    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
-    company = companies[len(companies) - 1]
-
-    rr = Route.objects.get(flock_group__company=company,digits=intr)
-
-    grp = rr.flock_group
-
-    flock_client = FlockClient(token=grp.access_token, app_id=app_id)
-
-
+    # lis = MobUser.objects.all().order_by('pk')
+    # mu = lis[len(lis) - 1]
+    # intr = mu.iteraction
+    #
+    # companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
+    # company = companies[len(companies) - 1]
+    #
+    # rr = Route.objects.get(flock_group__company=company, digits=intr)
+    #
+    # grp = rr.flock_group
+    fg = FlockGroup.objects.get(group_id=group)
+    flock_client = FlockClient(token=fg.access_token, app_id=app_id)
     send_as_hal = SendAs(name='@CallRecorder',
                          profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
 
     attachment = Attachment(title="Audio Recording from Call", downloads=[d], views=views)
-    files_message = Message(to=grp.group_id, attachments = [attachment],send_as=send_as_hal)
+    files_message = Message(to=fg.group_id, attachments=[attachment], send_as=send_as_hal)
     res = flock_client.send_chat(files_message)
-
+    log(res)
     return HttpResponse('ok')
 
 
