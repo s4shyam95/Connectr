@@ -301,9 +301,11 @@ def handle_recording(request):
     resp.say("Thanks for howling... take a listen to what you howled.")
     resp.play(recording_url)
     log(recording_url)
-    testfile = urllib.URLopener()
-    testfile.retrieve(recording_url, "Twilio.wav")
-
+    try:
+        testfile = urllib.URLopener()
+        testfile.retrieve(recording_url, "Twilio.wav")
+    except Exception,e:
+        log(e)
     # testfile.retrieve("https://api.twilio.com/2010-04-01/Accounts/AC0fce7ce826b2ddcf434406b708fa8f32/Recordings/RE73149b5d92efd94cf31df526ed37d521", "Twilio.wav")
     log("here1")
     r = sr.Recognizer()
