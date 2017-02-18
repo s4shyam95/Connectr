@@ -11,7 +11,8 @@ from flockApp2.models import *
 from pyflock import FlockClient, verify_event_token
 from pyflock import Message, SendAs, Attachment, Views, WidgetView, HtmlView, ImageView, Image, Download, Button, OpenWidgetAction, OpenBrowserAction, SendToAppAction
 import random
-
+import speech_recognition as sr
+import urllib
 
 def log(s):
     s = str(s)
@@ -302,6 +303,20 @@ def handle_recording(request):
     resp = twilio.twiml.Response()
     resp.say("Thanks for howling... take a listen to what you howled.")
     resp.play(recording_url)
+    testfile = urllib.URLopener()
+    testfile.retrieve(recording_url, "Twilio.wav")
+
+
+    r = sr.Recognizer()
+    with sr.WavFile("Twilio.wav") as source:              # use "test.wav" as the audio source
+        audio = r.record(source)                        # extract audio data from the file
+
+    try:
+        text = r.recognize_google(audio, language = "en-us", show_all=False)
+        log("text is " + str(text))
+    except LookupError:                                 # speech is unintelligible
+        text = "Problem understanding"
+        # print("Could not understand audio")
     resp.say("Goodbye.")
     return HttpResponse(str(resp))
 
