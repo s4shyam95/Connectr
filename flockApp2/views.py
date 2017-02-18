@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse
+from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 import json, jwt
@@ -262,6 +263,7 @@ def voice(request):
 
 
 @csrf_exempt
+@xframe_options_exempt
 def client(request):
     account_sid = TWILIO_ACCOUNT_SID
     auth_token = TWILIO_AUTH_TOKEN
