@@ -185,13 +185,16 @@
                     url: '/save_interactions/',
                     method: "POST",
                     data : {
-                        interactions : selected,
+                        interactions : JSON.stringify(selected),
                         team_id: "{{ company_name }}",
                         access_token: "{{ access_token }}",
                         company_name: $('#comp-call').val()
                     },
                     success: function (result) {
                         location.reload();
+                    },
+                    error: function(result){
+                        console.log(result);
                     }
                 });
             });
