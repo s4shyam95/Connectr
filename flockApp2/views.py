@@ -477,7 +477,7 @@ def save_recording(recording_url, callsid):
     reco = sr.Recognizer()
     text = "prob"
     try:
-        with sr.WavFile('Twilio.wav') as source:  # use "test.wav" as the audio source
+        with sr.AudioFile('Twilio.wav') as source:  # use "test.wav" as the audio source
             audio = reco.record(source)  # extract audio data from the file
         try:
             text = reco.recognize_google(audio, language="en-us", show_all=False)
