@@ -48,8 +48,6 @@
     <div class="row">
         <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3">
             <div class="call-screen">
-                <span class="thin">Now calling {{ number }} ...</span>
-
                 <div class="timer progress-radial setsize">
                     <div class="overlay setsize">
                         <p>
@@ -72,6 +70,17 @@
                 <div class="call-buttons">
                     <button type="button" class="send btn btn-default btn-block send-button">Send</button>
                 </div>
+            </div>
+            <div class="phone-input form-horizontal hidden">
+                <input class="form-control" type="hidden" id="number2" name="number"
+                       placeholder="Enter a phone number to message" value="{{ number }}"/>
+            </div>
+            <div class="phone-input form-horizontal">
+                <textarea class="form-control" rows="5" id="text" name="text" onkeyup="countChar(this)"
+                          placeholder="Enter Your message here"></textarea>
+            </div>
+            <div class="call-buttons">
+                <button type="button" class="send btn btn-default btn-block send-button">Send</button>
             </div>
             <div class="done-screen" style="display: none;">
                 <span class="thin">Your call with {{ number }} lasted</span>
