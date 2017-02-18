@@ -497,6 +497,7 @@ def transcribed(request):
     attachment_payload = json.dumps(payload)
     # print attachment_payload
     payload = 'token=' + token_payload + '&to=' + to_payload + '&text=' + text_payload + '&attachments=' + attachment_payload
+    log(payload)
     # print payload
     headers = {
         'content-type': "application/x-www-form-urlencoded",
