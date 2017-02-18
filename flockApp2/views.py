@@ -245,6 +245,7 @@ def get_messages(request):
         dic['by'] = i.by
         dic['text'] = i.text
         lst.append(dic)
+    lst = reversed(lst)
     return HttpResponse(json.dumps([dict(mpn=pn) for pn in lst]))
 
 
