@@ -4,7 +4,7 @@
     -moz-border-radius: 4px 4px 0 0;
     border-radius: 4px 4px 0 0;
     border: 0 solid rgba(0, 0, 0, 0);
-    background: #15cc51;
+    background: #00bb53;
     position: fixed;
     right: 20px;
     bottom: 0;
@@ -644,7 +644,7 @@
     }
 }
 #rocketapp-widget .rocketapp-widget-title {
-    background: #15cc51;
+    background: #00bb53;
     height: 40px;
     line-height: 40px;
     color: white;
@@ -800,7 +800,7 @@
 }
 #rocketapp-widget .rocketapp-widget-message-from-agent {
     position: relative;
-    background: #15cc51;
+    background: #00bb53;
     color: white;
     float: left;
     clear: both
@@ -818,7 +818,7 @@
     bottom: -2px;
     left: -7px;
     height: 20px;
-    border-left: 20px solid #15cc51;
+    border-left: 20px solid #00bb53;
     border-bottom-right-radius: 16px 14px;
     -webkit-transform: translateX(0) translateY(-2px);
     -moz-transform: translateX(0) translateY(-2px);
@@ -832,7 +832,7 @@
     width: 26px;
     height: 20px;
     background: white;
-    color: #15cc51;
+    color: #00bb53;
     border-bottom-right-radius: 10px;
     -webkit-transform: translateX(-30px) translateY(-2px);
     -moz-transform: translateX(-30px) translateY(-2px);
@@ -854,7 +854,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     resize: none;
-    border-color: #15cc51 !important;
+    border-color: #00bb53 !important;
     border-width: 1px;
     border-style: solid;
     -webkit-border-radius: 3px;
@@ -869,9 +869,9 @@
 }
 #rocketapp-widget .rocketapp-widget-input:focus {
     outline: none;
-    -webkit-box-shadow: 0 0 12px -3px #15cc51;
-    -moz-box-shadow: 0 0 12px -3px #15cc51;
-    box-shadow: 0 0 12px -3px #15cc51
+    -webkit-box-shadow: 0 0 12px -3px #00bb53;
+    -moz-box-shadow: 0 0 12px -3px #00bb53;
+    box-shadow: 0 0 12px -3px #00bb53
 }
 @media (max-width: 1024px) {
     #rocketapp-widget .rocketapp-widget-input {
@@ -1079,7 +1079,7 @@
 }
 #rocketapp-widget .rocketapp-widget-login-btn,
 #rocketapp-widget .rocketapp-widget-send-btn {
-    background: #15cc51;
+    background: #00bb53;
     -moz-opacity: 1;
     -khtml-opacity: 1;
     opacity: 1;
@@ -1123,7 +1123,7 @@
     width: 368px
 }
 #rocketapp-widget .rocketapp-widget-typing-indicator {
-    background: #15cc51;
+    background: #00bb53;
     width: auto;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
@@ -1145,7 +1145,7 @@
     bottom: -2px;
     left: -7px;
     height: 18px;
-    border-left: 20px solid #15cc51;
+    border-left: 20px solid #00bb53;
     border-bottom-right-radius: 16px 14px;
     -webkit-transform: translateX(0) translateY(-2px);
     -moz-transform: translateX(0) translateY(-2px);

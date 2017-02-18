@@ -2,25 +2,44 @@ from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
-from django.utils.html import escape
 import json, jwt
 from twilio.util import TwilioCapability
 from twilio.rest import TwilioRestClient
 import re
 import twilio.twiml
 from flockApp2.models import *
-from pyflock import FlockClient, verify_event_token
-from pyflock import Message, SendAs, Attachment, Views, WidgetView, HtmlView, ImageView, Image, Download, Button, \
-    OpenWidgetAction, OpenBrowserAction, SendToAppAction
+from pyflock import FlockClient
+from pyflock import Message, SendAs
 import random
 import speech_recognition as sr
-import urllib
-import wget
 import os
 import requests
 import shutil
 from flockProj2.settings import STATIC_PATH
 from django.urls import reverse
+
+
+# Voice code begins here
+caller_id = "+19172596412 "
+default_client = "Shyam"
+
+from flockProj2.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_DEFAULT_CALLERID, APPLICATION_SID
+
+digits_dict = {
+    "1": "one",
+    "2": "two",
+    "3": "three",
+    "4": "four",
+    "5": "five",
+    "6": "six",
+    "7": "seven",
+    "8": "eight",
+    "9": "nine",
+    "0": "zero",
+    "*": "star",
+    "#": "hash",
+}
+
 
 def log(s):
     s = str(s)
@@ -72,7 +91,7 @@ def listen(request):
                 break
 
         if (texts[0].strip())[0] != '@':
-            #     take last message where by = 2, and set that as ipman
+            # take last message where by = 2, and set that as ipman
             log("here")
             lis = Chat.objects.filter(by=2)
             last_msg = lis[len(lis) - 1]
@@ -127,21 +146,36 @@ def configure(request):
     u = User.objects.get(user_id=user_id)
     flock_client = FlockClient(token=u.access_token, app_id=app_id)
     grps = flock_client.get_groups()
+    flag = 0
     for i in grps:
         ret = Group.objects.filter(grp_id=i['id'])
         if len(ret) > 0:
-            context = {}
-            u.grp = ret[0]
-            u.save()
-            context['grp'] = ret[0]
-            context['live'] = False
-            return render(request, 'configure.html', context)
+            flag = 1
+    context = {}
+    if flag==1:
+        u.grp = ret[0]
+        u.save()
+        context['grp'] = ret[0]
+        context['live'] = False
+    else:
+
+        context['grps'] = grps
+
+        context['live'] = True
 
     company_name = (flock_client.get_user_info())['teamId']
-    context = {}
-    context['grps'] = grps
     context['company_name'] = company_name
-    context['live'] = True
+    ccs = Company.objects.filter(team_id=company_name)
+
+    if(ccs):
+        context['call'] = False
+        context['grps'] = grps
+    else:
+        context['call'] = True
+        cc = ccs[0]
+        context['routes'] = Route.objects.filter(flock_group__company=cc)
+
+    context['access_token'] = u.access_token
     return render(request, 'configure.html', context)
     # return HttpResponse('bullshit' + escape(repr(request)))
 
@@ -211,14 +245,9 @@ def get_messages(request):
     return HttpResponse(json.dumps([dict(mpn=pn) for pn in lst]))
 
 
-@csrf_exempt
-def callback(request):
-    return HttpResponse(str(json.dumps({'text': 'webook worked'})))
 
 
-# Voice code begins here
-caller_id = "+19172596412 "
-default_client = "Shyam"
+
 
 
 @csrf_exempt
@@ -232,30 +261,20 @@ def voice(request):
         else:
             r.client(dest_number)
 
-    # this below part is for routing to client
-    # resp = twilio.twiml.Response()
-    #
-    # # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
-    # with resp.dial(callerId=caller_id) as r:
-    #     r.client("jenny")
-
-
     return HttpResponse(str(resp))
 
 
 @csrf_exempt
 def client(request):
-    account_sid = "AC0fce7ce826b2ddcf434406b708fa8f32"
-    auth_token = "7ed3c51485f2893e9cb980efdf3fe8ea"
+    account_sid = TWILIO_ACCOUNT_SID
+    auth_token = TWILIO_AUTH_TOKEN
     capability = TwilioCapability(account_sid, auth_token)
-    application_sid = "APf6eb9001848f45a70d2f264b6f585b8d"  # Twilio Application Sid
+    application_sid = APPLICATION_SID
     capability.allow_client_outgoing(application_sid)
-    capability.allow_client_incoming("bob")
     token = capability.generate()
     context_dict = {}
     context_dict['token'] = token
     return render(request, 'client.html', context_dict)
-
 
 
 @csrf_exempt
@@ -265,156 +284,185 @@ def wait_music(request):
     return HttpResponse(str(twilio_waiting_response))
 
 
-# @csrf_exempt
-# def handle_recording(request):
-#     recording_url = request.POST["RecordingUrl"]
-#     ll = Log()
-#     ll.text = str(request.POST["RecordingUrl"])
-#     ll.save(force_insert=True)
-#     # shyam will make text here
-#
-#     twilio_response = twilio.twiml.Response()
-#     twilio_response.say("Your query has been sent to the team. You will now be connected to a customer sales"
-#                         " representative. Please hold the line")
-#     twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
-#                             name='wait_')
-#     return HttpResponse(str(twilio_response))
-
-
-
 @csrf_exempt
 def incoming(request):
-
-
-
-
-    callsid = request.POST["CallSid"]
-    log(callsid)
-
-
-    # exp begins
-
     twilio_response = twilio.twiml.Response()
-    twilio_response.say("Your query has been sent to the team. You will now be connected to a customer sales"
-                        " representative. Please hold the line")
-    twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
-                            name='wait_')
+    with twilio_response.gather(action='/handle_ivr/', numDigits=1) as g:
+        companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
+        company = companies[len(companies) - 1]
+        g.say('Welcome to ' + company.name + "'s quick support")
+        routes = Route.objects.filter(flock_group__company=company)
+        say_string = ''
+        for r in routes:
+            say_string += 'Press ' + digits_dict.get(r.digits, "ERROR") + ' to connect to ' + r.group_name + "team ."
+        g.say(say_string)
+        g.pause(length=10)
+        g.say(say_string)
+
     return HttpResponse(str(twilio_response))
-
-    # exp ends
-
-
-
-    resp = twilio.twiml.Response()
-    # Greet the caller by name
-    # log('wait_'+request.POST.get('From', ''))
-    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
-    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
-    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
-    with resp.dial(callerId=caller_id) as r:
-        r.client("bob")
-
-    return HttpResponse(str(resp))
-
-    resp.say("Hello ")
-    # Play an mp3
-    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
-
-    # Gather digits.
-    with resp.gather(numDigits=1, action="/handle-key", method="POST") as g:
-        g.say("""To speak to a real monkey, press 1.
-                 Press 2 to record your own monkey howl.
-                 Press any other key to start over.""")
-    return HttpResponse(str(resp))
 
 
 @csrf_exempt
-def handle_key(request):
-    """Handle key press from a user."""
+def handle_ivr(request):
+    callsid = request.POST["CallSid"]
+    digits = request.POST.get('Digits', '')
+    number = request.POST.get('From', '')
+    twilio_response = twilio.twiml.Response()
+    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
+    company = companies[len(companies) - 1]
+    group_name = 'customer support'
+    if digits:
+        route = Route.objects.filter(flock_group__company=company, digits=digits)[0]
+        if route:
+            mob_user = MobUser.objects.filter(number=number)
+            if not mob_user:
+                mob_user = MobUser(number=number)
+            else:
+                mob_user = mob_user[0]
+            mob_user.interaction = digits
+            mob_user.call_sid = callsid
+            mob_user.save()
+            group_name = route.flock_group.group_name
 
-    digit_pressed = request.POST['Digits']
-    if digit_pressed == "1":
-        resp = twilio.twiml.Response()
-        resp.say("You should have pressed two mate.")
-        return HttpResponse(str(resp))
-
-    elif digit_pressed == "2":
-        resp = twilio.twiml.Response()
-        resp.say("Record your monkey howl after the tone.")
-        resp.record(maxLength="30", action="/handle-recording", transcribe="true")
-        return HttpResponse(str(resp))
-
-    # If the caller pressed anything but 1, redirect them to the homepage.
+        connect_sucessful = "You are now connected to " + company.name + "'s " + group_name + " team." + \
+                            " Please explain your query in brief after the tone and press hash to finish."
+        twilio_response.say(connect_sucessful)
+        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#')
+        twilio_response.say(
+            "Sorry, we didn't get your recording. Please try again after the tone and press hash to finish.")
+        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#')
+        twilio_response.say("Sorry, we didn't get your recording. Please try again later")
+        twilio_response.hangup()
     else:
-        resp = twilio.twiml.Response()
-        resp.say("You should have pressed two mate.")
-        return HttpResponse(str(resp))
+        with twilio_response.gather(action='/handle_ivr/', numDigits=1) as g:
+            routes = Route.objects.filter(flock_group__company=company)
+            say_string = ''
+            for r in routes:
+                say_string += 'Press ' + digits_dict.get(r.digits, "ERROR") + ' to connect to ' + r.group_name + \
+                              "team ."
+            g.say(say_string)
+    return HttpResponse(str(twilio_response))
 
+
+# Paren will send me data from front end, save it
+@csrf_exempt
+def save_interactions(request):
+    company_name = request.POST['company_name']
+    team_id = request.POST['team_id']
+    access_token = request.POST['access_token']
+    c = Company.objects.filter(team_id=team_id)
+    if not c:
+        c = Company()
+        c.team_id = team_id
+    else:
+        c = c[0]
+    c.access_token = access_token
+    c.name = company_name
+    interactions = request.POST['interactions']
+    interactions = json.loads(interactions)
+    for i in interactions:
+        r = Route()
+        r.digits = i["number"]
+        flock_group = FlockGroup()
+        flock_group.access_token = access_token
+        flock_group.group_name = i["group_name"]
+        flock_group.group_id = i["group_id"]
+        flock_group.company = c
+        flock_group.save()
+        r.flock_group = flock_group
+        r.save()
+    return HttpResponse('ok')
+
+
+@csrf_exempt
+def incomingWidget(request):
+    callsid = request.GET['callsid']
+    account_sid = TWILIO_ACCOUNT_SID
+    auth_token = TWILIO_AUTH_TOKEN
+    capability = TwilioCapability(account_sid, auth_token)
+    application_sid = APPLICATION_SID
+    capability.allow_client_incoming(callsid)
+    token = capability.generate()
+    context_dict = {}
+    context_dict['token'] = token
+
+    # TODO
+    # change this to incoming call
+    return render(request, 'client.html', context_dict)
 
 
 @csrf_exempt
 def callupdate(request):
-    callsid = request.GET['callsid']
-    account_sid = "AC0fce7ce826b2ddcf434406b708fa8f32"
-    auth_token = "7ed3c51485f2893e9cb980efdf3fe8ea"
+    callsid = request.POST['callsid']
+    account_sid = TWILIO_ACCOUNT_SID
+    auth_token = TWILIO_AUTH_TOKEN
     client = TwilioRestClient(account_sid, auth_token)
     call = client.calls.update(
         callsid,
-        url="https://peaceful-hollows-95315.herokuapp.com/gimme/",
+        url="https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid,
         method="POST")
-    print(call.to)
+    return HttpResponse(str(call.to))
 
 
 @csrf_exempt
 def gimme(request):
     resp = twilio.twiml.Response()
-    #
-    # # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
+    callsid = request.GET['callsid']
     with resp.dial(callerId=caller_id) as r:
-        r.client("bob")
-
+        r.client(callsid)
     return HttpResponse(str(resp))
 
 
 @csrf_exempt
 def handle_recording(request):
     """Play back the caller's recording."""
+    callsid = request.POST['callsid']
     recording_url = request.POST["RecordingUrl"]
-    resp = twilio.twiml.Response()
-    resp.say("Thanks for howling... take a listen to what you howled.")
-    resp.play(recording_url)
-    log(recording_url)
+
+    twilio_response = twilio.twiml.Response()
+    twilio_response.say("Your query has been sent to the team. You will now be connected to a customer sales"
+                        " representative. Please hold the line")
+    twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
+                            name='wait_')
+
     try:
         r = requests.get(recording_url, stream=True)
         if r.status_code == 200:
             with open(os.path.join(STATIC_PATH, 'Twilio.wav'), 'wb') as f:
                 r.raw.decode_content = True
                 shutil.copyfileobj(r.raw, f)
-        # file_name = wget.download(recording_url)
-        # os.rename(file_name, 'Twilio.wav')
+                # file_name = wget.download(recording_url)
+                # os.rename(file_name, 'Twilio.wav')
     except Exception, e:
         log(e)
-    # testfile.retrieve("https://api.twilio.com/2010-04-01/Accounts/AC0fce7ce826b2ddcf434406b708fa8f32/Recordings/RE73149b5d92efd94cf31df526ed37d521", "Twilio.wav")
-    log("here1")
     r = sr.Recognizer()
-    log("here22")
+    text = "prob"
     try:
         with sr.WavFile(os.path.join(STATIC_PATH, 'Twilio.wav')) as source:  # use "test.wav" as the audio source
-            log("here2")
             audio = r.record(source)  # extract audio data from the file
         try:
-            log("here3")
             text = r.recognize_google(audio, language="en-us", show_all=False)
             log("text is " + str(text))
         except LookupError:  # speech is unintelligible
             text = "Problem understanding"
             # print("Could not understand audio")
-        resp.say("Goodbye.")
     except Exception, e:
         log(e)
 
 
+    # send text to flock,
+    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
+    company = companies[len(companies) - 1]
+    lis = MobUser.objects.filter(call_sid=callsid)
+    mobuser = lis[0]
+    r = Route.objects.filter(digits=mobuser.interaction, flock_group__company=company)[0]
 
+    flock_client = FlockClient(token=r.flock_group.access_token, app_id=app_id)
+    send_as_hal = SendAs(name='@' + mobuser.number + ' on Call',
+                         profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
 
-    return HttpResponse(str(resp))
+    # send attachment here, not message!, on click of that button, do callupdate!
+    send_as_message = Message(to=r.flock_group.group_id, text=text + ' ~ ' + callsid, send_as=send_as_hal)
+    res = flock_client.send_chat(send_as_message)
+    return HttpResponse(str(twilio_response))
 

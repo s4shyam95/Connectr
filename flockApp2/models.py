@@ -46,3 +46,28 @@ class Log(models.Model):
 
 
 
+class MobUser(models.Model):
+    call_sid = models.CharField(max_length=80)
+    number = models.CharField(max_length=20)
+    interaction = models.CharField(max_length=10)
+
+
+class Company(models.Model):
+    team_id = models.CharField(unique=True, max_length=100)
+    name = models.CharField(max_length=30)
+    number = models.CharField(max_length=30, unique=True)
+
+
+class FlockGroup(models.Model):
+    group_name = models.CharField(max_length=1000)
+    group_id = models.CharField(max_length=100)
+    access_token = models.CharField(max_length=1000)
+    company = models.ForeignKey(Company)
+
+
+class Route(models.Model):
+    digits = models.CharField(max_length=10)
+    flock_group = models.ForeignKey(FlockGroup)
+
+
+

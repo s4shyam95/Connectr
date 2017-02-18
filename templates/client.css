@@ -1,0 +1,88 @@
+input.form-control {
+    padding: 18px 12px;
+}
+.form-control:focus {
+    border: 1px solid #ccc;
+    outline: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+::-webkit-input-placeholder { 
+    font-weight: 300;
+}
+textarea {
+    resize: none;
+}
+.btn-flock {
+    background-color:#00bb53;
+    color: white;
+    
+}
+.call-buttons{
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px; 
+}
+.btn {
+    color: #aaa;
+    font-weight: 300;
+}
+.btn.call, .btn.hangup {
+     width: 48.5%;
+}
+.call-buttons>.call {
+    margin-right: 4px;
+}
+.call-buttons>.hangup{
+    margin-left: 4px;
+}
+.hangup:hover,.hangup:active,.hangup:focus,.hangup:active:hover, .hangup:active:focus {
+    background: #d9534f;
+    color: white;
+    border-color:#d9534f;
+}
+.call:hover,.call:active,.call:focus,.call:active:hover, .call:active:focus,.send-button:hover,.send-button:active,.send-button:focus,.send-button:active:hover, .send-button:active:focus {
+    background: #00bb53;
+    color: white;
+    border-color: #00bb53;
+}
+.phone-input {
+    margin-top: 10px;
+}
+#log{
+    font-weight: 300;
+    text-align: center;
+}
+#log.log-error{
+    color: #d9534f;
+}
+#log.log-success{
+    color: #00bb53;
+}
+
+.nav-tabs {
+    background: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.nav-tabs>li>a {
+    background: #f2f2f2;
+    color: #697178;
+    border: none;
+    text-align: center;
+    margin-left: 15px;
+    margin-right: 15px; 
+    font-size: 1.4em;
+}
+.nav-tabs>li>a, .nav-tabs>li>a:focus,.nav-tabs>li>a:active {
+    outline: 0;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:active{
+    background: #f2f2f2;
+    color: #00bb53;
+    border: none;
+    border-bottom: 3px solid #00bb53;
+    margin-bottom: 0;
+    outline: 0 !important;
+}
