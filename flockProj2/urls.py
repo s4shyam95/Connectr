@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'callupdate', callupdate),
     url(r'handle_ivr/?', handle_ivr),
     url(r'save_interactions/?', save_interactions),
+    url(r'claim_call/?', incomingWidget)
 ]
