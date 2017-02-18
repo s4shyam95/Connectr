@@ -311,16 +311,20 @@ def handle_recording(request):
     # testfile.retrieve("https://api.twilio.com/2010-04-01/Accounts/AC0fce7ce826b2ddcf434406b708fa8f32/Recordings/RE73149b5d92efd94cf31df526ed37d521", "Twilio.wav")
     log("here1")
     r = sr.Recognizer()
-    with sr.WavFile("Twilio.wav") as source:              # use "test.wav" as the audio source
-        log("here2")
-        audio = r.record(source)                        # extract audio data from the file
+    log("here22")
     try:
-        log("here3")
-        text = r.recognize_google(audio, language = "en-us", show_all=False)
-        log("text is " + str(text))
-    except LookupError:                                 # speech is unintelligible
-        text = "Problem understanding"
-        # print("Could not understand audio")
-    resp.say("Goodbye.")
+        with sr.WavFile("Twilio.wav") as source:              # use "test.wav" as the audio source
+            log("here2")
+            audio = r.record(source)                        # extract audio data from the file
+        try:
+            log("here3")
+            text = r.recognize_google(audio, language = "en-us", show_all=False)
+            log("text is " + str(text))
+        except LookupError:                                 # speech is unintelligible
+            text = "Problem understanding"
+            # print("Could not understand audio")
+        resp.say("Goodbye.")
+    except Exception,e:
+        log(e)
     return HttpResponse(str(resp))
 
