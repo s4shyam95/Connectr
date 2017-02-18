@@ -238,14 +238,13 @@ def get_messages(request):
     grp_id = request.GET['grp_id']
     g = Group.objects.get(grp_id=grp_id)
     ip = str(get_client_ip(request))
-    lis = Chat.objects.filter(ip=ip, grp=g)
+    lis = Chat.objects.filter(ip=ip, grp=g).order_by('pk')
     lst = []
     for i in lis:
         dic = {}
         dic['by'] = i.by
         dic['text'] = i.text
         lst.append(dic)
-    lst = reversed(lst)
     return HttpResponse(json.dumps([dict(mpn=pn) for pn in lst]))
 
 
@@ -292,7 +291,7 @@ def incoming(request):
     log(str(len(companies)) + " companies")
     with twilio_response.gather(action='/handle_ivr/', numDigits=1) as g:
         g.say('Welcome to ' + company.name + "'s quick support")
-        routes = Route.objects.filter(flock_group__company=company)
+        routes = Route.objects.filter(flock_group__company=company).order_by('pk')
         log(str(len(routes)) + " routes")
         say_string = ''
         for r in routes:
@@ -311,13 +310,13 @@ def handle_ivr(request):
     digits = request.POST.get('Digits', '')
     number = request.POST.get('From', '')
     twilio_response = twilio.twiml.Response()
-    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
+    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
     company = companies[len(companies) - 1]
     group_name = 'customer support'
     if digits:
-        route = Route.objects.filter(flock_group__company=company, digits=digits)[0]
+        route = Route.objects.filter(flock_group__company=company, digits=digits).order_by('pk')[0]
         if route:
-            mob_user = MobUser.objects.filter(number=number)
+            mob_user = MobUser.objects.filter(number=number).order_by('pk')
             if not mob_user:
                 mob_user = MobUser(number=number)
             else:
@@ -338,7 +337,7 @@ def handle_ivr(request):
         twilio_response.hangup()
     else:
         with twilio_response.gather(action='/handle_ivr/', numDigits=1) as g:
-            routes = Route.objects.filter(flock_group__company=company)
+            routes = Route.objects.filter(flock_group__company=company).order_by('pk')
             say_string = ''
             for r in routes:
                 say_string += 'Press ' + digits_dict.get(r.digits, "ERROR") + ' to connect to ' + r.group_name + \
@@ -353,7 +352,7 @@ def save_interactions(request):
     company_name = request.POST['company_name']
     team_id = request.POST['team_id']
     access_token = request.POST['access_token']
-    c = Company.objects.filter(team_id=team_id)
+    c = Company.objects.filter(team_id=team_id).order_by('pk')
     if not c:
         c = Company()
         c.team_id = team_id
@@ -456,11 +455,11 @@ def handle_recording(request):
 
 
     # send text to flock,
-    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
+    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
     company = companies[len(companies) - 1]
-    lis = MobUser.objects.filter(call_sid=callsid)
+    lis = MobUser.objects.filter(call_sid=callsid).order_by('pk')
     mobuser = lis[0]
-    r = Route.objects.filter(digits=mobuser.interaction, flock_group__company=company)[0]
+    r = Route.objects.filter(digits=mobuser.interaction, flock_group__company=company).order_by('pk')[0]
 
     flock_client = FlockClient(token=r.flock_group.access_token, app_id=app_id)
     send_as_hal = SendAs(name='@' + mobuser.number + ' on Call',
