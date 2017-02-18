@@ -283,6 +283,7 @@ def wait_music(request):
 
 
 @csrf_exempt
+@xframe_options_exempt
 def incoming(request):
     twilio_response = twilio.twiml.Response()
     companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
