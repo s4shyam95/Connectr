@@ -1,3 +1,4 @@
+import threading
 from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -507,7 +508,7 @@ def save_recording(recording_url, callsid):
     # try:
     # os.remove('Twilio.wav')
     # except OSError:
-    #     pass
+    # pass
     # log("downloading begins")
     #
     # try:
@@ -546,8 +547,8 @@ def save_recording(recording_url, callsid):
     #     log('t2' + e.message)
 
 
-    text = requests.post(NGROK_URL,data=json.dumps({'recording_url':recording_url})).text
-
+    text = requests.post(NGROK_URL, data=json.dumps({'recording_url': recording_url})).text
+    log(text)
     # send text to flock,
     companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
     company = companies[len(companies) - 1]
