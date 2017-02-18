@@ -57,11 +57,11 @@
                                    placeholder="Enter a phone number to message"/>
                         </div>
                         <div class="phone-input form-horizontal">
-                            <textarea class="form-control" rows="5" id="text" name="text" onkeyup="countChar(this)"
+                            <textarea class="form-control" rows="5" id="text" name="text"
                                       placeholder="Enter Your message here"></textarea>
                         </div>
                         <div class="call-buttons">
-                            <button type="button" class="btn btn-default btn-block send-button">Send</button>
+                            <button type="button" onclick="send()" class="btn btn-default btn-block send-button">Send</button>
                         </div>
                     </div>
                 </div>
@@ -153,6 +153,34 @@
         }, 5000);
 
     });
+
+
+    function send() {
+            var message = $('textarea#text').val();
+            var number = $('#number').val()
+            var SID = "AC0fce7ce826b2ddcf434406b708fa8f32"
+            var Key = "7ed3c51485f2893e9cb980efdf3fe8ea"
+
+
+            $.ajax({
+                type: "POST",
+                url: "https://api.twilio.com/2010-04-01/Accounts/AC0fce7ce826b2ddcf434406b708fa8f32/Messages.json",
+                data: {
+                    "To": number,
+                    "From": "+19172596412",
+                    "Body": message
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader ("Authorization", "Basic " + btoa(SID + ':' + Key));
+                },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
 
 </script>
 <!-- ExtraJS-->
