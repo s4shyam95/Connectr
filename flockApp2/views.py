@@ -418,7 +418,7 @@ def gimme(request):
 @csrf_exempt
 def handle_recording(request):
     """Play back the caller's recording."""
-    callsid = request.POST['callsid']
+    callsid = request.POST['CallSid']
     recording_url = request.POST["RecordingUrl"]
 
     twilio_response = twilio.twiml.Response()
