@@ -1,8 +1,4 @@
-import shutil
-import threading
 import urllib
-
-import requests
 
 from django.shortcuts import render
 from django.http.response import HttpResponse
@@ -13,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 import os
 import json, jwt
+import time
 from twilio.util import TwilioCapability
 from twilio.rest import TwilioRestClient
 import re
@@ -332,10 +329,12 @@ def handle_ivr(request):
         connect_sucessful = "You are now connected to " + company.name + "'s " + group_name + " team." + \
                             " Please explain your query in brief after the tone and press hash to finish."
         twilio_response.say(connect_sucessful)
-        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#')
+        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#',
+                               transcribe='true', transcribeCallback='/transcribe_handle')
         twilio_response.say(
             "Sorry, we didn't get your recording. Please try again after the tone and press hash to finish.")
-        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#')
+        twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#',
+                               transcribe='true', transcribeCallback='/transcribe_handle')
         twilio_response.say("Sorry, we didn't get your recording. Please try again later")
         twilio_response.hangup()
     else:
@@ -452,6 +451,28 @@ def callrecording(request, group='ERROR'):
     return HttpResponse(str(resp))
 
 
+@csrf_exempt
+def transcribed(request):
+    callsid = request.POST['CallSid']
+    text = request.POST['TranscriptionText']
+    log("From Twilio: " + text)
+    # send text to flock,
+    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
+    company = companies[len(companies) - 1]
+    lis = MobUser.objects.filter(call_sid=callsid).order_by('pk')
+    mobuser = lis[0]
+    r = Route.objects.filter(digits=mobuser.interaction, flock_group__company=company).order_by('pk')[0]
+
+    flock_client = FlockClient(token=r.flock_group.access_token, app_id=app_id)
+    send_as_hal = SendAs(name='@' + mobuser.number + ' on Call',
+                         profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+
+    # send attachment here, not message!, on click of that button, do callupdate!
+    send_as_message = Message(to=r.flock_group.group_id, text=text + ' ~ ' + callsid, send_as=send_as_hal)
+    res = flock_client.send_chat(send_as_message)
+    return HttpResponse('ok')
+
+
 def save_recording(recording_url, callsid):
     log("deleting file")
     try:
@@ -463,15 +484,16 @@ def save_recording(recording_url, callsid):
     try:
         # r = requests.get(recording_url, stream=True)
         # if r.status_code == 200:
-            # with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
-            #     # for block in r.iter_content(1024):
-            #     # f.write(block)
-            #     r.raw.decode_content = True
-            #     shutil.copyfileobj(r.raw, f)
-            # f.close()
-            # # os.system("wget -O Twilio.wav " + recording_url)
-            # # time.sleep(5)
+        # with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
+        # # for block in r.iter_content(1024):
+        #     # f.write(block)
+        #     r.raw.decode_content = True
+        #     shutil.copyfileobj(r.raw, f)
+        # f.close()
+        # # os.system("wget -O Twilio.wav " + recording_url)
+        # # time.sleep(5)
         urllib.urlretrieve(recording_url, "Twilio.wav")
+        time.sleep(10)
     except Exception, e:
         log('t1' + e.message)
 
@@ -524,6 +546,6 @@ def handle_recording(request):
     twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
                             name='wait_')
 
-    threading.Thread(target=save_recording, args=(recording_url, callsid,)).start()
+    # threading.Thread(target=save_recording, args=(recording_url, callsid,)).start()
     return HttpResponse(str(twilio_response))
 

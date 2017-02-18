@@ -26,8 +26,8 @@
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flockProj2/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
-              <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="86" max-vertical-offset="630">
+              <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -58,20 +58,21 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.34026465" vertical-offset="5010" max-vertical-offset="6285">
-              <caret line="462" column="8" selection-start-line="462" selection-start-column="8" selection-end-line="462" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.48582232" vertical-offset="4303" max-vertical-offset="5565">
+              <caret line="338" column="109" selection-start-line="338" selection-start-column="109" selection-end-line="338" selection-end-column="109" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#1075#1147#0" expanded="false" />
-                <element signature="e#1232#1426#0" expanded="false" />
-                <element signature="e#1456#1580#0" expanded="false" />
-                <element signature="e#7587#7898#0" expanded="false" />
-                <element signature="e#7962#8326#0" expanded="false" />
-                <element signature="e#11651#12535#0" expanded="false" />
-                <element signature="e#12584#13102#0" expanded="false" />
-                <element signature="e#13147#13627#0" expanded="false" />
-                <element signature="e#13667#14041#0" expanded="false" />
-                <element signature="e#14104#14981#0" expanded="false" />
+                <element signature="e#1087#1159#0" expanded="false" />
+                <element signature="e#1244#1438#0" expanded="false" />
+                <element signature="e#1468#1592#0" expanded="false" />
+                <element signature="e#7599#7910#0" expanded="false" />
+                <element signature="e#7974#8338#0" expanded="false" />
+                <element signature="e#11845#12729#0" expanded="false" />
+                <element signature="e#12778#13296#0" expanded="false" />
+                <element signature="e#13341#13821#0" expanded="false" />
+                <element signature="e#13861#14235#0" expanded="false" />
+                <element signature="e#14298#15175#0" expanded="false" />
+                <element signature="e#15276#17535#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -135,9 +136,9 @@
         <option value="$PROJECT_DIR$/flockProj2/settings.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/Procfile" />
-        <option value="$PROJECT_DIR$/flockProj2/urls.py" />
         <option value="$PROJECT_DIR$/templates/client.html" />
         <option value="$PROJECT_DIR$/flockApp2/models.py" />
+        <option value="$PROJECT_DIR$/flockProj2/urls.py" />
         <option value="$PROJECT_DIR$/flockApp2/views.py" />
       </list>
     </option>
@@ -555,16 +556,17 @@
           <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1075#1147#0" expanded="false" />
-            <element signature="e#1232#1426#0" expanded="false" />
-            <element signature="e#1456#1580#0" expanded="false" />
-            <element signature="e#7587#7898#0" expanded="false" />
-            <element signature="e#7962#8326#0" expanded="false" />
-            <element signature="e#11651#12535#0" expanded="false" />
-            <element signature="e#12584#13102#0" expanded="false" />
-            <element signature="e#13147#13627#0" expanded="false" />
-            <element signature="e#13667#14041#0" expanded="false" />
-            <element signature="e#14104#14981#0" expanded="false" />
+            <element signature="e#1087#1159#0" expanded="false" />
+            <element signature="e#1244#1438#0" expanded="false" />
+            <element signature="e#1468#1592#0" expanded="false" />
+            <element signature="e#7599#7910#0" expanded="false" />
+            <element signature="e#7974#8338#0" expanded="false" />
+            <element signature="e#11845#12729#0" expanded="false" />
+            <element signature="e#12778#13296#0" expanded="false" />
+            <element signature="e#13341#13821#0" expanded="false" />
+            <element signature="e#13861#14235#0" expanded="false" />
+            <element signature="e#14298#15175#0" expanded="false" />
+            <element signature="e#15276#17535#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -730,14 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flockProj2/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="615">
-          <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="559" max-vertical-offset="1200">
@@ -748,28 +742,37 @@
     </entry>
     <entry file="file:///Library/Python/2.7/site-packages/speech_recognition/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="15743" max-vertical-offset="16365">
-          <caret line="1078" column="0" selection-start-line="1078" selection-start-column="0" selection-end-line="1078" selection-end-column="0" />
+        <state vertical-scroll-proportion="-25.802326" vertical-offset="15849" max-vertical-offset="16365">
+          <caret line="186" column="8" selection-start-line="186" selection-start-column="8" selection-end-line="186" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flockProj2/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="86" max-vertical-offset="630">
+          <caret line="36" column="42" selection-start-line="36" selection-start-column="42" selection-end-line="36" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34026465" vertical-offset="5010" max-vertical-offset="6285">
-          <caret line="462" column="8" selection-start-line="462" selection-start-column="8" selection-end-line="462" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.48582232" vertical-offset="4303" max-vertical-offset="5565">
+          <caret line="338" column="109" selection-start-line="338" selection-start-column="109" selection-end-line="338" selection-end-column="109" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1075#1147#0" expanded="false" />
-            <element signature="e#1232#1426#0" expanded="false" />
-            <element signature="e#1456#1580#0" expanded="false" />
-            <element signature="e#7587#7898#0" expanded="false" />
-            <element signature="e#7962#8326#0" expanded="false" />
-            <element signature="e#11651#12535#0" expanded="false" />
-            <element signature="e#12584#13102#0" expanded="false" />
-            <element signature="e#13147#13627#0" expanded="false" />
-            <element signature="e#13667#14041#0" expanded="false" />
-            <element signature="e#14104#14981#0" expanded="false" />
+            <element signature="e#1087#1159#0" expanded="false" />
+            <element signature="e#1244#1438#0" expanded="false" />
+            <element signature="e#1468#1592#0" expanded="false" />
+            <element signature="e#7599#7910#0" expanded="false" />
+            <element signature="e#7974#8338#0" expanded="false" />
+            <element signature="e#11845#12729#0" expanded="false" />
+            <element signature="e#12778#13296#0" expanded="false" />
+            <element signature="e#13341#13821#0" expanded="false" />
+            <element signature="e#13861#14235#0" expanded="false" />
+            <element signature="e#14298#15175#0" expanded="false" />
+            <element signature="e#15276#17535#0" expanded="false" />
           </folding>
         </state>
       </provider>
