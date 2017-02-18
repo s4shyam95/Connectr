@@ -223,12 +223,7 @@ default_client = "Shyam"
 @csrf_exempt
 def voice(request):
     dest_number = request.POST['PhoneNumber']
-    log(dest_number)
     resp = twilio.twiml.Response()
-    with resp.dial() as d:
-        d.client("jenny")
-        d.queue(dest_number)
-    return HttpResponse(str(resp))
 
     with resp.dial(callerId=caller_id) as r:
         if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
@@ -291,7 +286,12 @@ def incoming(request):
     resp = twilio.twiml.Response()
     # Greet the caller by name
     log('wait_'+request.POST.get('From', ''))
-    resp.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',name='wait_'+request.POST.get('From', ''))
+    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+    resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
+    with resp.dial(callerId=caller_id) as r:
+        r.client("jenny")
+
     return HttpResponse(str(resp))
 
     resp.say("Hello ")
