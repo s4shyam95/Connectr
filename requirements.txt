@@ -85,4 +85,3 @@ SpeechRecognition==3.6.0
 zope.interface==4.1.1
 git+git://github.com/flockchat/pyflock
 psycopg2
-pycrypto
