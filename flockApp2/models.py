@@ -44,6 +44,9 @@ class Chat(models.Model):
 class Log(models.Model):
     text = models.CharField(max_length=2048)
 
+    def __unicode__(self):
+        return self.text
+
 
 
 class MobUser(models.Model):
