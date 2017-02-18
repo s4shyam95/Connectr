@@ -34,5 +34,5 @@ urlpatterns = [
     url(r'save_interactions/?', save_interactions),
     url(r'claim_call/?', incomingWidget),
     url(r'callrecording/(?P<group>\w+)/?', callrecording),
-    url(r'transcibe_handle/?', transcribed),
+    url(r'transcribe_handle/?', transcribed),
 ]
