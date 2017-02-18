@@ -12,6 +12,13 @@ from pyflock import FlockClient, verify_event_token
 from pyflock import Message, SendAs, Attachment, Views, WidgetView, HtmlView, ImageView, Image, Download, Button, OpenWidgetAction, OpenBrowserAction, SendToAppAction
 import random
 
+
+def log(s):
+    s = str(s)
+    ll = Log()
+    ll.text=s
+    ll.save(force_insert=True)
+
 app_id = 'ac0f0c25-c0dd-4065-95d2-8ea744465bd1'
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -59,15 +66,11 @@ def listen(request):
         if (texts[0].strip())[0] != '@':
         #     take last message where by = 2, and set that as ipman
             lis = Chat.objects.filter(by=2)
-            ll = Log()
-            ll.text = str(len(lis))
-            ll.save(force_insert=True)
             last_msg = lis[-1]
             ipman = last_msg.ipman
+            log("ipname is " + ipman.name)
             text = " ".join(texts[1:])
-            ll = Log()
-            ll.text = str(text)
-            ll.save(force_insert=True)
+            log("text is " + str(text))
             msg = Chat()
             msg.text = text
             msg.by = 1
@@ -216,23 +219,25 @@ default_client = "Shyam"
 
 @csrf_exempt
 def voice(request):
-    # dest_number = request.POST['PhoneNumber']
-    # ll = Log()
-    # ll.text = str(request.POST['PhoneNumber'])
-    # ll.save(force_insert=True)
-    # resp = twilio.twiml.Response()
-    # with resp.dial(callerId=caller_id) as r:
-    #     if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
-    #         r.number(dest_number)
-    #     else:
-    #         r.client(dest_number)
-
-
+    dest_number = request.POST['PhoneNumber']
+    ll = Log()
+    ll.text = str(request.POST['PhoneNumber'])
+    ll.save(force_insert=True)
     resp = twilio.twiml.Response()
-
-    # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
     with resp.dial(callerId=caller_id) as r:
-        r.client("jenny")
+        if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
+            r.number(dest_number)
+        else:
+            r.client(dest_number)
+
+    # this below part is for routing to client
+    # resp = twilio.twiml.Response()
+    #
+    # # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
+    # with resp.dial(callerId=caller_id) as r:
+    #     r.client("jenny")
+
+
     return HttpResponse(str(resp))
 
 @csrf_exempt

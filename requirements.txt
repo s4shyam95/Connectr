@@ -86,5 +86,6 @@ wadofstuff-django-serializers==1.1.0
 Werkzeug==0.11.10
 WTForms==2.1
 xattr==0.6.4
+SpeechRecognition==3.6.0
 zope.interface==4.1.1
 git+git://github.com/flockchat/pyflock
