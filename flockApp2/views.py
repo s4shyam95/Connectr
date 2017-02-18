@@ -71,7 +71,7 @@ def listen(request):
             log(last_msg)
             ipman = last_msg.ipman
             log("ipname is " + ipman.name)
-            text = " ".join(texts[1:])
+            text = " ".join(texts)
             log("text is " + str(text))
             msg = Chat()
             msg.text = text

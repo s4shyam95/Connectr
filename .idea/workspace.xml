@@ -36,8 +36,8 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6686047" vertical-offset="705" max-vertical-offset="4665">
-              <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.49418604" vertical-offset="840" max-vertical-offset="4665">
+              <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -621,8 +621,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6686047" vertical-offset="705" max-vertical-offset="4665">
-          <caret line="72" column="42" selection-start-line="72" selection-start-column="42" selection-end-line="72" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.49418604" vertical-offset="840" max-vertical-offset="4665">
+          <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
           <folding />
         </state>
       </provider>
