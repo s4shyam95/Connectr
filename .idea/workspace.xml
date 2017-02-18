@@ -65,8 +65,8 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4811133" vertical-offset="1093" max-vertical-offset="3345">
-              <caret line="285" column="22" selection-start-line="285" selection-start-column="22" selection-end-line="285" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.27977315" vertical-offset="1982" max-vertical-offset="3345">
+              <caret line="381" column="22" selection-start-line="381" selection-start-column="22" selection-end-line="381" selection-end-column="22" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
                 <element signature="e#1046#1118#0" expanded="false" />
@@ -80,8 +80,8 @@
                 <element signature="e#7558#7869#0" expanded="false" />
                 <element signature="e#7933#8297#0" expanded="false" />
                 <element signature="e#8342#8562#0" expanded="false" />
-                <element signature="e#8628#9451#0" expanded="false" />
-                <element signature="e#11827#12711#0" expanded="false" />
+                <element signature="e#8605#9428#0" expanded="false" />
+                <element signature="e#11804#12688#0" expanded="false" />
                 <element signature="e#14360#15237#0" expanded="false" />
                 <element signature="e#15283#17497#0" expanded="false" />
                 <element signature="e#17556#20350#0" expanded="false" />
@@ -597,8 +597,8 @@
             <element signature="e#7558#7869#0" expanded="false" />
             <element signature="e#7933#8297#0" expanded="false" />
             <element signature="e#8342#8562#0" expanded="false" />
-            <element signature="e#8628#9451#0" expanded="false" />
-            <element signature="e#11827#12711#0" expanded="false" />
+            <element signature="e#8605#9428#0" expanded="false" />
+            <element signature="e#11804#12688#0" expanded="false" />
             <element signature="e#14360#15237#0" expanded="false" />
             <element signature="e#15283#17497#0" expanded="false" />
             <element signature="e#17556#20350#0" expanded="false" />
@@ -846,8 +846,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4811133" vertical-offset="1093" max-vertical-offset="3345">
-          <caret line="285" column="22" selection-start-line="285" selection-start-column="22" selection-end-line="285" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.27977315" vertical-offset="1982" max-vertical-offset="3345">
+          <caret line="381" column="22" selection-start-line="381" selection-start-column="22" selection-end-line="381" selection-end-column="22" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
             <element signature="e#1046#1118#0" expanded="false" />
@@ -861,8 +861,8 @@
             <element signature="e#7558#7869#0" expanded="false" />
             <element signature="e#7933#8297#0" expanded="false" />
             <element signature="e#8342#8562#0" expanded="false" />
-            <element signature="e#8628#9451#0" expanded="false" />
-            <element signature="e#11827#12711#0" expanded="false" />
+            <element signature="e#8605#9428#0" expanded="false" />
+            <element signature="e#11804#12688#0" expanded="false" />
             <element signature="e#14360#15237#0" expanded="false" />
             <element signature="e#15283#17497#0" expanded="false" />
             <element signature="e#17556#20350#0" expanded="false" />

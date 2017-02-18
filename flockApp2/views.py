@@ -283,7 +283,6 @@ def wait_music(request):
 
 
 @csrf_exempt
-@xframe_options_exempt
 def incoming(request):
     twilio_response = twilio.twiml.Response()
     companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
@@ -380,6 +379,7 @@ def save_interactions(request):
 
 
 @csrf_exempt
+@xframe_options_exempt
 def incomingWidget(request):
     callsid = request.GET['callsid']
     group_id = request.GET['group_id']
