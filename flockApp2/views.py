@@ -547,7 +547,7 @@ def save_recording(recording_url, callsid, number):
     #     log('t2' + e.message)
 
 
-    text = requests.post(NGROK_URL, data=json.dumps({'recording_url': recording_url})).text
+    text = requests.post(NGROK_URL, data={'recording_url': recording_url}).text
     log(text)
     # send text to flock,
     companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
@@ -562,7 +562,6 @@ def save_recording(recording_url, callsid, number):
     text_payload = text
     b1 = Button(name = "Claim Ticket", id="1", action=OpenWidgetAction(url=sidebar_url, desktop_type="sidebar"))
     attachment = Attachment(title="Incoming Call", buttons=[b1])
-
     send_as_hal = SendAs(name='@' + mobuser.number + ' on Call',
                          profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
 
