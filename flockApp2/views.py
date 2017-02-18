@@ -48,36 +48,52 @@ def listen(request):
         text = data["text"]
         texts = (text.strip()).split(' ')
         #not really ip @name hai ye
-        if (texts[0].strip())[0] != '@':
-        #     take last message where by = 2, and set that as ipman
-            lis = Chat.objects.filter(by=2)
-            last_msg = lis[-1]
-            ipman = last_msg.ipman
-            text = " ".join(texts[1:])
-        else:
-            name = (texts[0].strip())[1:]
-            name = name.lower()
-            ipman = IPMan.objects.get(name=name)
-            text = " ".join(texts[1:])
         g = Group.objects.get(grp_id=data["chat"])
         access = ''
         for u in User.objects.all():
             if u.grp.pk == g.pk:
                 access = u.access_token
                 break
-        msg = Chat()
-        msg.text = text
-        msg.by = 1
-        msg.grp = g
-        msg.ip = ipman.ip
-        msg.ipman = ipman
-        msg.save(force_insert=True)
-        text = "'"+text+"' to " + str(msg.ipman.name)
-        flock_client = FlockClient(token=access, app_id=app_id)
-        send_as_hal = SendAs(name=str(data["userName"]),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
-        send_as_message = Message(to=g.grp_id,text=text,send_as=send_as_hal)
-        res = flock_client.send_chat(send_as_message)
-        return HttpResponse('{"text": "Reply Sent to User"}')
+
+
+        if (texts[0].strip())[0] != '@':
+        #     take last message where by = 2, and set that as ipman
+            lis = Chat.objects.filter(by=2)
+            last_msg = lis[-1]
+            ipman = last_msg.ipman
+            text = " ".join(texts[1:])
+            msg = Chat()
+            msg.text = text
+            msg.by = 1
+            msg.grp = g
+            msg.ip = ipman.ip
+            msg.ipman = ipman
+            msg.save(force_insert=True)
+            text = "'"+text+"' to " + str(msg.ipman.name)
+            flock_client = FlockClient(token=access, app_id=app_id)
+            send_as_hal = SendAs(name=str(data["userName"]),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+            send_as_message = Message(to=g.grp_id,text=text,send_as=send_as_hal)
+            res = flock_client.send_chat(send_as_message)
+            return HttpResponse('{"text": "Reply Sent to User"}')
+        else:
+            name = (texts[0].strip())[1:]
+            name = name.lower()
+            ipman = IPMan.objects.get(name=name)
+            text = " ".join(texts[1:])
+            msg = Chat()
+            msg.text = text
+            msg.by = 1
+            msg.grp = g
+            msg.ip = ipman.ip
+            msg.ipman = ipman
+            msg.save(force_insert=True)
+            text = "'"+text+"' to " + str(msg.ipman.name)
+            flock_client = FlockClient(token=access, app_id=app_id)
+            send_as_hal = SendAs(name=str(data["userName"]),profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+            send_as_message = Message(to=g.grp_id,text=text,send_as=send_as_hal)
+            res = flock_client.send_chat(send_as_message)
+            return HttpResponse('{"text": "Reply Sent to User"}')
+
 
     return HttpResponse('listen')
 
