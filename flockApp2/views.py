@@ -299,7 +299,6 @@ def incoming(request):
         g.say(say_string)
         g.pause(length=10)
         # g.say(say_string)
-    log(" here")
     return HttpResponse(str(twilio_response))
 
 
@@ -451,6 +450,7 @@ def callrecording(request, group='ERROR'):
 @csrf_exempt
 def handle_recording(request):
     """Play back the caller's recording."""
+    log("reached handle recording")
     callsid = request.POST['CallSid']
     recording_url = request.POST["RecordingUrl"]
 
@@ -459,11 +459,13 @@ def handle_recording(request):
                         " representative. Please hold the line")
     twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
                             name='wait_')
-
+    log("deleting file")
     try:
         os.remove('Twilio.wav')
     except OSError:
         pass
+    log("downloading begins")
+
     try:
         r = requests.get(recording_url, stream=True)
         if r.status_code == 200:
@@ -473,7 +475,8 @@ def handle_recording(request):
                 # file_name = wget.download(recording_url)
                 # os.rename(file_name, 'Twilio.wav')
     except Exception, e:
-        log('t1' + e)
+        log('t1' + e.message)
+    log("reco begins")
     r = sr.Recognizer()
     text = "prob"
     try:
@@ -486,7 +489,7 @@ def handle_recording(request):
             text = "Problem understanding"
             # print("Could not understand audio")
     except Exception, e:
-        log('t2' + e)
+        log('t2' + e.message)
 
 
     # send text to flock,
