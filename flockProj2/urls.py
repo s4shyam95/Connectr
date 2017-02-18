@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'incoming/', incoming),
     url(r'handle-key', handle_key),
     url(r'handle-recording', handle_recording),
+    url(r'wait_music', wait_music, name="wait_music"),
 ]

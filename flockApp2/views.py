@@ -19,7 +19,7 @@ import os
 import requests
 import shutil
 from flockProj2.settings import STATIC_PATH
-
+from django.urls import reverse
 
 def log(s):
     s = str(s)
@@ -222,23 +222,25 @@ default_client = "Shyam"
 
 @csrf_exempt
 def voice(request):
-    # dest_number = request.POST['PhoneNumber']
-    # ll = Log()
-    # ll.text = str(request.POST['PhoneNumber'])
-    # ll.save(force_insert=True)
-    # resp = twilio.twiml.Response()
-    # with resp.dial(callerId=caller_id) as r:
-    #     if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
-    #         r.number(dest_number)
-    #     else:
-    #         r.client(dest_number)
+    dest_number = request.POST['PhoneNumber']
+
+    resp = twilio.twiml.Response()
+    with resp.dial() as d:
+        d.queue(dest_number)
+    return HttpResponse(str(resp))
+
+    with resp.dial(callerId=caller_id) as r:
+        if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
+            r.number(dest_number)
+        else:
+            r.client(dest_number)
 
     # this below part is for routing to client
-    resp = twilio.twiml.Response()
-
-    # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
-    with resp.dial(callerId=caller_id) as r:
-        r.client("jenny")
+    # resp = twilio.twiml.Response()
+    #
+    # # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
+    # with resp.dial(callerId=caller_id) as r:
+    #     r.client("jenny")
 
 
     return HttpResponse(str(resp))
@@ -258,10 +260,39 @@ def client(request):
     return render(request, 'client.html', context_dict)
 
 
+
+@csrf_exempt
+def wait_music(request):
+    twilio_waiting_response = twilio.twiml.Response()
+    twilio_waiting_response.play(url='http://com.twilio.sounds.music.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3')
+    return HttpResponse(str(twilio_waiting_response))
+
+
+# @csrf_exempt
+# def handle_recording(request):
+#     recording_url = request.POST["RecordingUrl"]
+#     ll = Log()
+#     ll.text = str(request.POST["RecordingUrl"])
+#     ll.save(force_insert=True)
+#     # shyam will make text here
+#
+#     twilio_response = twilio.twiml.Response()
+#     twilio_response.say("Your query has been sent to the team. You will now be connected to a customer sales"
+#                         " representative. Please hold the line")
+#     twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
+#                             name='wait_')
+#     return HttpResponse(str(twilio_response))
+
+
+
 @csrf_exempt
 def incoming(request):
     resp = twilio.twiml.Response()
     # Greet the caller by name
+    log('wait_'+request.POST.get('From', ''))
+    resp.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',name='wait_'+request.POST.get('From', ''))
+    return HttpResponse(str(resp))
+
     resp.say("Hello ")
     # Play an mp3
     resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
