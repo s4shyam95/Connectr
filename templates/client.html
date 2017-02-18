@@ -11,6 +11,9 @@
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
     <link href="{% static "css/navbar.css" %}" rel="stylesheet">
     <link href="{% static "css/client.css" %}" rel="stylesheet">
+    <link href="{% static "css/progress.css" %}" rel="stylesheet">
+    <link href="{% static "css/snackbar.css" %}" rel="stylesheet">
+    <link href="{% static "css/material-snackbar.css" %}" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -49,9 +52,18 @@
                             </button>
                         </div>
 
-                        <div id="log">Loading ...</div>
+{#                        <div id="log">Loading ...</div>#}
                     </div>
                     <div role="tabpanel" class="tab-pane" id="profile">
+                        <div class="timer progress-bar2 progress-radial setsize" style="display: none;">
+                            <div class="overlay setsize">
+                                <p>
+                                    <span class="minutes">00</span>
+                                    <span>:</span>
+                                    <span class="seconds">00</span>
+                                </p>
+                            </div>
+                        </div>
                         <div class="phone-input form-horizontal">
                             <input class="form-control" type="text" id="number2" name="number-message"
                                    placeholder="Enter a phone number to message"/>
@@ -61,7 +73,8 @@
                                       placeholder="Enter Your message here"></textarea>
                         </div>
                         <div class="call-buttons">
-                            <button type="button" onclick="send()" class="btn btn-default btn-block send-button">Send</button>
+                            <button type="button" class="send btn btn-default btn-block send-button">Send
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -73,8 +86,74 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static "js/bootstrap.min.js" %}"></script>
+<script src="{% static "js/snackbar.js" %}"></script>
 <script type="text/javascript">
+    var timer;
+    var t = -1;
+    var setTimer = function () {
+        t += 1;
+        var seconds = t % 60;
+        var minutes = (parseInt(t / 60));
+        $('.minutes').text((minutes).toLocaleString(undefined, {minimumIntegerDigits: 2}));
+        $('.seconds').text((seconds).toLocaleString(undefined, {minimumIntegerDigits: 2}));
+        timer = setTimeout(setTimer, 200);
+        if (t > 59) {
+            if (t % 60 == 0) {
+                $(".timer").addClass("progress-60");
+                $(".timer").removeClass("progress-" + (t - 1) % 60);
+            }
+            else if (t % 60 == 1) {
+                $(".timer").addClass("progress-" + t % 60);
+                $(".timer").removeClass("progress-60");
+            }
+            else {
+                $(".timer").addClass("progress-" + t % 60);
+                $(".timer").removeClass("progress-" + (t - 1) % 60);
+            }
+        }
+        else {
+            $(".timer").addClass("progress-" + t % 60);
+            $(".timer").removeClass("progress-" + (t - 1) % 60);
+        }
+
+
+    }
     $(function () {
+
+        Twilio.Device.connect(function (conn) {
+            $("#log").text("Successfully established call");
+            $('#log').removeClass("log-error");
+            $('#log').addClass("log-success");
+            t = -1;
+            $('.minutes').text("00");
+            $('.seconds').text("00");
+            for (i = 0; i <= 60; i++) {
+                $('.timer').removeClass("progress-" + (i));
+            }
+            $('.progress-bar2').show(function () {
+                $(".setsize").each(function () {
+                    $(this).height($(this).width());
+                    console.log($(this).height() + " , " + $(this).width());
+                });
+            });
+            ;
+            setTimer();
+        });
+
+        Twilio.Device.disconnect(function (conn) {
+            $("#log").text("Call ended");
+            $('#log').removeClass("log-error");
+            $('#log').removeClass("log-success");
+            for (i = 0; i <= 60; i++) {
+                $('.timer').removeClass("progress-" + (i));
+            }
+            t = -1;
+            $(".progress-bar2").hide(function () {
+            });
+            $('.minutes').text("00");
+            $('.seconds').text("00");
+        });
+
         Twilio.Device.setup("{{ token }}");
 
         Twilio.Device.ready(function (device) {
@@ -87,17 +166,6 @@
             $('#log').removeClass("log-success");
         });
 
-        Twilio.Device.connect(function (conn) {
-            $("#log").text("Successfully established call");
-            $('#log').removeClass("log-error");
-            $('#log').addClass("log-success");
-        });
-
-        Twilio.Device.disconnect(function (conn) {
-            $("#log").text("Call ended");
-            $('#log').removeClass("log-error");
-            $('#log').removeClass("log-success");
-        });
 
         Twilio.Device.incoming(function (conn) {
             $("#log").text("Incoming connection from " + conn.parameters.From);
@@ -106,8 +174,6 @@
             $('#log').addClass("log-success");
             conn.accept();
         });
-
-
 
 
         var query_string = {};
@@ -129,8 +195,8 @@
         }
         console.log(query_string);
 
-        setTimeout(function(){
-              $.ajax({
+        setTimeout(function () {
+            $.ajax({
                 url: '/callupdate/',
                 method: "POST",
                 data: {
@@ -147,31 +213,35 @@
         }, 5000);
 
 
-
-        $('.call').click(function(){
+        $('.call').click(function () {
             // get the phone number to connect the call to
             params = {"PhoneNumber": $("#number").val()};
             Twilio.Device.connect(params);
         });
 
 
-        $('.hangup').click(function(){
+        $('.hangup').click(function () {
             // get the phone number to connect the call to
             Twilio.Device.disconnectAll();
         });
 
+        $(".setsize").each(function () {
+            $(this).height($(this).width());
+            console.log($(this).height() + " , " + $(this).width());
+        });
 
+        $(window).on('resize', function () {
+            $(".setsize").each(function () {
+                $(this).height($(this).width());
+            });
+        });
 
-    });
-
-
-    function send() {
+        $('.send').click(function () {
+            // get the phone number to connect the call to
             var message = $('textarea#text').val();
-            var number = $('#number2').val()
-            var SID = "AC0fce7ce826b2ddcf434406b708fa8f32"
-            var Key = "7ed3c51485f2893e9cb980efdf3fe8ea"
-
-
+            var number = $('#number2').val();
+            var SID = "AC0fce7ce826b2ddcf434406b708fa8f32";
+            var Key = "7ed3c51485f2893e9cb980efdf3fe8ea";
             $.ajax({
                 type: "POST",
                 url: "https://api.twilio.com/2010-04-01/Accounts/AC0fce7ce826b2ddcf434406b708fa8f32/Messages.json",
@@ -182,15 +252,28 @@
                 },
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader ("Authorization", "Basic " + btoa(SID + ':' + Key));
+                    $.snackbar({content: "Sending message..."});
                 },
                 success: function (data) {
-                    console.log(data);
+                    console.log("Success: "+data);
+                    $('#text').val('');
+                    $('#number2').val('');
+                    $.snackbar({content: "SMS successfully sent."});
+
+
                 },
                 error: function (data) {
                     console.log(data);
                 }
             });
-        }
+        });
+
+
+
+
+
+    });
+
 
 </script>
 <!-- ExtraJS-->

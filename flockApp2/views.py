@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 import os
 import json, jwt
 import time
+import requests
 from twilio.util import TwilioCapability
 from twilio.rest import TwilioRestClient
 import re
@@ -384,6 +385,7 @@ def save_interactions(request):
 def incomingWidget(request):
     callsid = request.GET['callsid']
     group_id = request.GET['group_id']
+    number = request.GET['number']
     account_sid = TWILIO_ACCOUNT_SID
     auth_token = TWILIO_AUTH_TOKEN
     capability = TwilioCapability(account_sid, auth_token)
@@ -392,10 +394,11 @@ def incomingWidget(request):
     token = capability.generate()
     context_dict = {}
     context_dict['token'] = token
+    context_dict['number'] = number
     context_dict['group_id'] = group_id
     # TODO
     # change this to incoming call
-    return render(request, 'client.html', context_dict)
+    return render(request, 'incoming.html', context_dict)
 
 
 @csrf_exempt
@@ -455,6 +458,7 @@ def callrecording(request, group='ERROR'):
 def transcribed(request):
     callsid = request.POST['CallSid']
     text = request.POST['TranscriptionText']
+    number = request.POST['From']
     log("From Twilio: " + text)
     # send text to flock,
     companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
@@ -463,13 +467,42 @@ def transcribed(request):
     mobuser = lis[0]
     r = Route.objects.filter(digits=mobuser.interaction, flock_group__company=company).order_by('pk')[0]
 
-    flock_client = FlockClient(token=r.flock_group.access_token, app_id=app_id)
-    send_as_hal = SendAs(name='@' + mobuser.number + ' on Call',
-                         profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+    hostUrl = "https://api.flock.co/v1/chat.sendMessage/"
+    sidebar_url  = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + \
+                r.flock_group.group_id.split(':')[1]+'&number='+number
 
-    # send attachment here, not message!, on click of that button, do callupdate!
-    send_as_message = Message(to=r.flock_group.group_id, text=text + ' ~ ' + callsid, send_as=send_as_hal)
-    res = flock_client.send_chat(send_as_message)
+
+    token_payload = r.flock_group.access_token
+    to_payload = r.flock_group.group_id
+    text_payload = text
+    attachment_title = 'Incoming Call'
+    attachment_description = 'Accept request from user regarding '+text
+    icon_url="https://freeiconshop.com/wp-content/uploads/edd/phone-solid.png"
+    payload = [{
+        'title': attachment_title,
+        'description': attachment_description,
+        'buttons': [{
+                'name': 'Claim Ticket',
+                'icon': icon_url,
+                'action': {
+                    'type': 'openWidget',
+                    'desktopType': 'sidebar',
+                    'mobileType': 'modal',
+                    'url': sidebar_url,
+                },
+                'id': '1'
+            }
+        ]
+    }]
+    attachment_payload = json.dumps(payload)
+    # print attachment_payload
+    payload = 'token=' + token_payload + '&to=' + to_payload + '&text=' + text_payload + '&attachments=' + attachment_payload
+    # print payload
+    headers = {
+        'content-type': "application/x-www-form-urlencoded",
+         }
+    response = requests.request("POST", hostUrl, data=payload, headers=headers)
+    log(response.text)
     return HttpResponse('ok')
 
 
