@@ -65,8 +65,10 @@ def listen(request):
 
         if (texts[0].strip())[0] != '@':
         #     take last message where by = 2, and set that as ipman
+            log("here")
             lis = Chat.objects.filter(by=2)
             last_msg = lis[-1]
+            log(last_msg)
             ipman = last_msg.ipman
             log("ipname is " + ipman.name)
             text = " ".join(texts[1:])
