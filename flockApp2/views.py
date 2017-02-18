@@ -48,10 +48,17 @@ def listen(request):
         text = data["text"]
         texts = (text.strip()).split(' ')
         #not really ip @name hai ye
-        name = (texts[0].strip())[1:]
-        name = name.lower()
-        ipman = IPMan.objects.get(name=name)
-        text = " ".join(texts[1:])
+        if (texts[0].strip())[0] != '@':
+        #     take last message where by = 2, and set that as ipman
+            lis = Chat.objects.filter(by=2)
+            last_msg = lis[-1]
+            ipman = last_msg.ipman
+            text = " ".join(texts[1:])
+        else:
+            name = (texts[0].strip())[1:]
+            name = name.lower()
+            ipman = IPMan.objects.get(name=name)
+            text = " ".join(texts[1:])
         g = Group.objects.get(grp_id=data["chat"])
         access = ''
         for u in User.objects.all():
