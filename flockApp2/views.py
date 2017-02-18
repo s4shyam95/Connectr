@@ -1,9 +1,13 @@
+import shutil
 import threading
+
+import requests
 
 from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 import os
@@ -18,7 +22,6 @@ from pyflock import Message, SendAs
 import random
 import speech_recognition as sr
 from django.urls import reverse
-import time
 
 # Voice code begins here
 caller_id = "+19172596412 "
@@ -457,16 +460,16 @@ def save_recording(recording_url, callsid):
     log("downloading begins")
 
     try:
-        # r = requests.get(recording_url, stream=True)
-        # if r.status_code == 200:
-        # with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
-        # # for block in r.iter_content(1024):
-        #         # f.write(block)
-        #         r.raw.decode_content = True
-        #         shutil.copyfileobj(r.raw, f)
-        #     f.close()
-        os.system("wget -O Twilio.wav " + recording_url)
-        time.sleep(5)
+        r = requests.get(recording_url, stream=True)
+        if r.status_code == 200:
+            with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
+                # for block in r.iter_content(1024):
+                # f.write(block)
+                r.raw.decode_content = True
+                shutil.copyfileobj(r.raw, f)
+            f.close()
+            # os.system("wget -O Twilio.wav " + recording_url)
+            # time.sleep(5)
     except Exception, e:
         log('t1' + e.message)
 
