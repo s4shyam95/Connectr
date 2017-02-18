@@ -44,8 +44,8 @@
                                    placeholder="Enter a phone number to call"/>
                         </div>
                         <div class="call-buttons">
-                            <button type="button" class="call btn btn-default pull-left" onclick="call();">Call</button>
-                            <button type="button" class="hangup btn btn-default pull-right" onclick="hangup();">Hangup
+                            <button type="button" class="call btn btn-default pull-left">Call</button>
+                            <button type="button" class="hangup btn btn-default pull-right">Hangup
                             </button>
                         </div>
 
@@ -53,7 +53,7 @@
                     </div>
                     <div role="tabpanel" class="tab-pane" id="profile">
                         <div class="phone-input form-horizontal">
-                            <input class="form-control" type="text" id="number-message" name="number-message"
+                            <input class="form-control" type="text" id="number2" name="number-message"
                                    placeholder="Enter a phone number to message"/>
                         </div>
                         <div class="phone-input form-horizontal">
@@ -107,15 +107,8 @@
             conn.accept();
         });
 
-        function call() {
-            // get the phone number to connect the call to
-            params = {"PhoneNumber": $("#number").val()};
-            Twilio.Device.connect(params);
-        }
 
-        function hangup() {
-            Twilio.Device.disconnectAll();
-        }
+
 
         var query_string = {};
         var query = window.location.search.substring(1);
@@ -152,12 +145,28 @@
             });
         }, 5000);
 
+
+
+        $('.call').click(function(){
+            // get the phone number to connect the call to
+            params = {"PhoneNumber": $("#number").val()};
+            Twilio.Device.connect(params);
+        });
+
+
+        $('.hangup').click(function(){
+            // get the phone number to connect the call to
+            Twilio.Device.disconnectAll();
+        });
+
+
+
     });
 
 
     function send() {
             var message = $('textarea#text').val();
-            var number = $('#number').val()
+            var number = $('#number2').val()
             var SID = "AC0fce7ce826b2ddcf434406b708fa8f32"
             var Key = "7ed3c51485f2893e9cb980efdf3fe8ea"
 
