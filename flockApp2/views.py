@@ -154,7 +154,7 @@ def configure(request):
             flag = 1
             rett = ret[0]
     context = {}
-    if flag==1:
+    if flag == 1:
         u.grp = rett
         u.save()
         context['grp'] = rett
@@ -247,11 +247,6 @@ def get_messages(request):
     return HttpResponse(json.dumps([dict(mpn=pn) for pn in lst]))
 
 
-
-
-
-
-
 @csrf_exempt
 def voice(request):
     dest_number = request.POST['PhoneNumber']
@@ -298,11 +293,12 @@ def incoming(request):
         log(str(len(routes)) + " routes")
         say_string = ''
         for r in routes:
-            say_string += 'Press ' + digits_dict.get(r.digits, "ERROR") + ' to connect to ' + r.group_name + "team ."
+            say_string += 'Press ' + digits_dict.get(r.digits,
+                                                     "ERROR") + ' to connect to ' + r.flock_group.group_name + "team ."
         g.say(say_string)
         g.pause(length=10)
         # g.say(say_string)
-
+    log(" here")
     return HttpResponse(str(twilio_response))
 
 
