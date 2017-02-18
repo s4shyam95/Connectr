@@ -556,7 +556,7 @@ def save_recording(recording_url, callsid, number):
     mobuser = lis[0]
     r = Route.objects.filter(digits=mobuser.interaction, flock_group__company=company).order_by('pk')[0]
     flock_client = FlockClient(token=r.flock_group.access_token, app_id=app_id)
-    sidebar_url = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + \
+    sidebar_url = "https://peaceful-hollows-95315.herokuapp.com/claim_call/?callsid=" + callsid + '&group_id=' + \
                   r.flock_group.group_id.split(':')[1] + '&number=' + number
 
     log(sidebar_url)
