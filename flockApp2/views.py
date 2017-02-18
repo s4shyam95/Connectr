@@ -477,11 +477,18 @@ def handle_recording(request):
                 # file_name = wget.download(recording_url)
                 # os.rename(file_name, 'Twilio.wav')
             f.close()
+            while not os.path.exists('Twilio.wav'):
+                with open('Twilio.wav', 'wb') as f:
+                for block in r.iter_content(1024):
+                    f.write(block)
+                f.close()
     except Exception, e:
         log('t1' + e.message)
 
     if not os.path.exists('Twilio.wav'):
         log('FUCKCKCKCKCKCKCK')
+
+
     log("reco begins")
     reco = sr.Recognizer()
     text = "prob"
