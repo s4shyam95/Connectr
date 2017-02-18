@@ -46,8 +46,8 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27977315" vertical-offset="2147" max-vertical-offset="2865">
-              <caret line="362" column="12" selection-start-line="362" selection-start-column="12" selection-end-line="362" selection-end-column="12" />
+            <state vertical-scroll-proportion="1.7561437" vertical-offset="1771" max-vertical-offset="3075">
+              <caret line="375" column="16" selection-start-line="375" selection-start-column="16" selection-end-line="375" selection-end-column="16" />
               <folding>
                 <element signature="e#985#1057#0" expanded="false" />
                 <element signature="e#1142#1336#0" expanded="false" />
@@ -59,7 +59,6 @@
                 <element signature="e#7485#7796#0" expanded="false" />
                 <element signature="e#7837#8201#0" expanded="false" />
                 <element signature="e#8246#8466#0" expanded="false" />
-                <element signature="e#8509#9173#0" expanded="false" />
                 <element signature="e#9218#11205#0" expanded="false" />
                 <element signature="e#12186#12626#0" expanded="false" />
                 <element signature="e#12671#13027#0" expanded="false" />
@@ -622,7 +621,6 @@
             <element signature="e#7485#7796#0" expanded="false" />
             <element signature="e#7837#8201#0" expanded="false" />
             <element signature="e#8246#8466#0" expanded="false" />
-            <element signature="e#8509#9173#0" expanded="false" />
             <element signature="e#9218#11205#0" expanded="false" />
             <element signature="e#12186#12626#0" expanded="false" />
             <element signature="e#12671#13027#0" expanded="false" />
@@ -790,8 +788,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27977315" vertical-offset="2147" max-vertical-offset="2865">
-          <caret line="362" column="12" selection-start-line="362" selection-start-column="12" selection-end-line="362" selection-end-column="12" />
+        <state vertical-scroll-proportion="1.7561437" vertical-offset="1771" max-vertical-offset="3075">
+          <caret line="375" column="16" selection-start-line="375" selection-start-column="16" selection-end-line="375" selection-end-column="16" />
           <folding>
             <element signature="e#985#1057#0" expanded="false" />
             <element signature="e#1142#1336#0" expanded="false" />
@@ -803,7 +801,6 @@
             <element signature="e#7485#7796#0" expanded="false" />
             <element signature="e#7837#8201#0" expanded="false" />
             <element signature="e#8246#8466#0" expanded="false" />
-            <element signature="e#8509#9173#0" expanded="false" />
             <element signature="e#9218#11205#0" expanded="false" />
             <element signature="e#12186#12626#0" expanded="false" />
             <element signature="e#12671#13027#0" expanded="false" />

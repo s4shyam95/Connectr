@@ -360,6 +360,7 @@ def save_interactions(request):
         c = c[0]
     c.access_token = access_token
     c.name = company_name
+    c.number = TWILIO_DEFAULT_CALLERID
     c.save()
     interactions = request.POST['interactions']
     interactions = json.loads(interactions)
