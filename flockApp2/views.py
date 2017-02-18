@@ -476,16 +476,20 @@ def handle_recording(request):
                 # shutil.copyfileobj(r.raw, f)
                 # file_name = wget.download(recording_url)
                 # os.rename(file_name, 'Twilio.wav')
+            f.close()
     except Exception, e:
         log('t1' + e.message)
+
+    if not os.path.exists('Twilio.wav'):
+        log('FUCKCKCKCKCKCKCK')
     log("reco begins")
-    r = sr.Recognizer()
+    reco = sr.Recognizer()
     text = "prob"
     try:
         with sr.WavFile('Twilio.wav') as source:  # use "test.wav" as the audio source
-            audio = r.record(source)  # extract audio data from the file
+            audio = reco.record(source)  # extract audio data from the file
         try:
-            text = r.recognize_google(audio, language="en-us", show_all=False)
+            text = reco.recognize_google(audio, language="en-us", show_all=False)
             log("text is " + str(text))
         except LookupError:  # speech is unintelligible
             text = "Problem understanding"
