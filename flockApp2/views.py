@@ -413,7 +413,7 @@ def gimme(request):
     resp = twilio.twiml.Response()
     callsid = request.GET['callsid']
     resp.say('This call will be recorded for training purposes.')
-    with resp.dial(callerId=caller_id, record="record-from-answer-dual", action="/call-recording/") as r:
+    with resp.dial(callerId=caller_id, record="record-from-answer-dual", action="/callrecording/") as r:
         r.client(callsid)
     return HttpResponse(str(resp))
 
