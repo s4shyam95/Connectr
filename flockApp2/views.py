@@ -392,7 +392,7 @@ def incomingWidget(request):
     context_dict = {}
     context_dict['token'] = token
     context_dict['number'] = number
-    context_dict['group_id'] = group_id
+    context_dict['group_id'] = "g:" + group_id
     # TODO
     # change this to incoming call
     return render(request, 'incoming.html', context_dict)

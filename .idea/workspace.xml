@@ -23,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="incoming.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="incoming.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/incoming.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16831683" vertical-offset="1295" max-vertical-offset="4005">
-              <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+            <state vertical-scroll-proportion="-10.416667" vertical-offset="1910" max-vertical-offset="4005">
+              <caret line="144" column="53" selection-start-line="144" selection-start-column="29" selection-end-line="144" selection-end-column="53" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -47,10 +47,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="client.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/client.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="36.458332" vertical-offset="2690" max-vertical-offset="4305">
+            <state vertical-scroll-proportion="-1.7326733" vertical-offset="2690" max-vertical-offset="4305">
               <caret line="121" column="4" selection-start-line="121" selection-start-column="4" selection-end-line="275" selection-end-column="7" />
               <folding>
                 <element signature="n#style#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -65,8 +65,8 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3926" max-vertical-offset="4785">
-              <caret line="567" column="103" selection-start-line="567" selection-start-column="92" selection-end-line="567" selection-end-column="103" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2004" max-vertical-offset="3210">
+              <caret line="394" column="35" selection-start-line="394" selection-start-column="35" selection-end-line="394" selection-end-column="35" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
                 <element signature="e#1046#1118#0" expanded="false" />
@@ -82,9 +82,10 @@
                 <element signature="e#8342#8562#0" expanded="false" />
                 <element signature="e#8605#9428#0" expanded="false" />
                 <element signature="e#11804#12688#0" expanded="false" />
-                <element signature="e#13373#13853#0" expanded="false" />
-                <element signature="e#13893#14267#0" expanded="false" />
-                <element signature="e#14330#15207#0" expanded="false" />
+                <element signature="e#13900#14274#0" expanded="false" />
+                <element signature="e#14337#15214#0" expanded="false" />
+                <element signature="e#15260#17474#0" expanded="false" />
+                <element signature="e#17533#20327#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -131,9 +132,9 @@
         <option value="$PROJECT_DIR$/static/css/material-snackbar.css" />
         <option value="$PROJECT_DIR$/static/css/snackbar.css" />
         <option value="$PROJECT_DIR$/flockProj2/settings.py" />
-        <option value="$PROJECT_DIR$/flockApp2/views.py" />
         <option value="$PROJECT_DIR$/templates/client.html" />
         <option value="$PROJECT_DIR$/templates/incoming.html" />
+        <option value="$PROJECT_DIR$/flockApp2/views.py" />
       </list>
     </option>
   </component>
@@ -599,9 +600,10 @@
             <element signature="e#8342#8562#0" expanded="false" />
             <element signature="e#8605#9428#0" expanded="false" />
             <element signature="e#11804#12688#0" expanded="false" />
-            <element signature="e#13373#13853#0" expanded="false" />
-            <element signature="e#13893#14267#0" expanded="false" />
-            <element signature="e#14330#15207#0" expanded="false" />
+            <element signature="e#13900#14274#0" expanded="false" />
+            <element signature="e#14337#15214#0" expanded="false" />
+            <element signature="e#15260#17474#0" expanded="false" />
+            <element signature="e#17533#20327#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -813,8 +815,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3926" max-vertical-offset="4785">
-          <caret line="567" column="103" selection-start-line="567" selection-start-column="92" selection-end-line="567" selection-end-column="103" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2004" max-vertical-offset="3210">
+          <caret line="394" column="35" selection-start-line="394" selection-start-column="35" selection-end-line="394" selection-end-column="35" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
             <element signature="e#1046#1118#0" expanded="false" />
@@ -830,9 +832,20 @@
             <element signature="e#8342#8562#0" expanded="false" />
             <element signature="e#8605#9428#0" expanded="false" />
             <element signature="e#11804#12688#0" expanded="false" />
-            <element signature="e#13373#13853#0" expanded="false" />
-            <element signature="e#13893#14267#0" expanded="false" />
-            <element signature="e#14330#15207#0" expanded="false" />
+            <element signature="e#13900#14274#0" expanded="false" />
+            <element signature="e#14337#15214#0" expanded="false" />
+            <element signature="e#15260#17474#0" expanded="false" />
+            <element signature="e#17533#20327#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/incoming.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.416667" vertical-offset="1910" max-vertical-offset="4005">
+          <caret line="144" column="53" selection-start-line="144" selection-start-column="29" selection-end-line="144" selection-end-column="53" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -849,23 +862,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/client.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="36.458332" vertical-offset="2690" max-vertical-offset="4305">
+        <state vertical-scroll-proportion="-1.7326733" vertical-offset="2690" max-vertical-offset="4305">
           <caret line="121" column="4" selection-start-line="121" selection-start-column="4" selection-end-line="275" selection-end-column="7" />
           <folding>
             <element signature="n#style#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/incoming.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16831683" vertical-offset="1295" max-vertical-offset="4005">
-          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
