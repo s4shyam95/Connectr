@@ -371,7 +371,7 @@ def gimme(request):
     #
     # # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
     with resp.dial(callerId=caller_id) as r:
-        r.client("jenny")
+        r.client("bob")
 
     return HttpResponse(str(resp))
 
