@@ -55,7 +55,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'flockProj2.urls'
 
-
 WSGI_APPLICATION = 'flockProj2.wsgi.application'
 
 
@@ -118,19 +117,19 @@ STATICFILES_DIRS = (
 CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
-{
-    'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': ['templates'],
-    'APP_DIRS': True,
-    'OPTIONS': {
-        'context_processors': [
-            'django.template.context_processors.debug',
-            'django.template.context_processors.request',
-            'django.contrib.auth.context_processors.auth',
-            'django.contrib.messages.context_processors.messages',
-        ],
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
     },
-},
 ]
 TWILIO_ACCOUNT_SID = 'AC0fce7ce826b2ddcf434406b708fa8f32'
 TWILIO_AUTH_TOKEN = '7ed3c51485f2893e9cb980efdf3fe8ea'

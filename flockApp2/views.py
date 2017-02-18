@@ -289,17 +289,19 @@ def wait_music(request):
 @csrf_exempt
 def incoming(request):
     twilio_response = twilio.twiml.Response()
+    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
+    company = companies[len(companies) - 1]
+    log(str(len(companies)) + " companies")
     with twilio_response.gather(action='/handle_ivr/', numDigits=1) as g:
-        companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID)
-        company = companies[len(companies) - 1]
         g.say('Welcome to ' + company.name + "'s quick support")
         routes = Route.objects.filter(flock_group__company=company)
+        log(str(len(routes)) + " routes")
         say_string = ''
         for r in routes:
             say_string += 'Press ' + digits_dict.get(r.digits, "ERROR") + ' to connect to ' + r.group_name + "team ."
         g.say(say_string)
         g.pause(length=10)
-        g.say(say_string)
+        # g.say(say_string)
 
     return HttpResponse(str(twilio_response))
 
