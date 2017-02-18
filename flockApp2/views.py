@@ -1,5 +1,6 @@
 import shutil
 import threading
+import urllib
 
 import requests
 
@@ -460,16 +461,17 @@ def save_recording(recording_url, callsid):
     log("downloading begins")
 
     try:
-        r = requests.get(recording_url, stream=True)
-        if r.status_code == 200:
-            with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
-                # for block in r.iter_content(1024):
-                # f.write(block)
-                r.raw.decode_content = True
-                shutil.copyfileobj(r.raw, f)
-            f.close()
-            # os.system("wget -O Twilio.wav " + recording_url)
-            # time.sleep(5)
+        # r = requests.get(recording_url, stream=True)
+        # if r.status_code == 200:
+            # with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
+            #     # for block in r.iter_content(1024):
+            #     # f.write(block)
+            #     r.raw.decode_content = True
+            #     shutil.copyfileobj(r.raw, f)
+            # f.close()
+            # # os.system("wget -O Twilio.wav " + recording_url)
+            # # time.sleep(5)
+        urllib.urlretrieve(recording_url, "Twilio.wav")
     except Exception, e:
         log('t1' + e.message)
 
