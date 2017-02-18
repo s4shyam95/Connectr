@@ -431,7 +431,7 @@ def callrecording(request, group='ERROR'):
     log(group)
     fg = FlockGroup.objects.get(group_id=group)
 
-    d = Download(src="http://wallpapercave.com/wp/H630T6R.jpg")
+    d = Download(src=url)
     views = Views()
     views.add_flockml("<flockml>Download the <i>Audio Recording</i></flockml>")
     flock_client = FlockClient(token=fg.access_token, app_id=app_id)
@@ -442,7 +442,9 @@ def callrecording(request, group='ERROR'):
     files_message = Message(to=fg.group_id, attachments=[attachment], send_as=send_as_hal)
     res = flock_client.send_chat(files_message)
     log(res)
-    return HttpResponse('ok')
+    resp = twilio.twiml.Response()
+    resp.say("Goodbye")
+    return HttpResponse(str(resp))
 
 
 @csrf_exempt
@@ -457,6 +459,10 @@ def handle_recording(request):
     twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
                             name='wait_')
 
+    try:
+        os.remove('Twilio.wav')
+    except OSError:
+        pass
     try:
         r = requests.get(recording_url, stream=True)
         if r.status_code == 200:
