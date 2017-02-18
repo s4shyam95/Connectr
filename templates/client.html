@@ -135,20 +135,21 @@
             }
         }
         console.log(query_string);
+
         setTimeout(function(){
-          $.ajax({
-            url: '/callupdate/',
-            method: "POST",
-            data: {
-                callsid: query_string["callsid"]
-            },
-            success: function (result) {
-                location.reload();
-            },
-            error: function (result) {
-                console.log(result);
-            }
-        });
+              $.ajax({
+                url: '/callupdate/',
+                method: "POST",
+                data: {
+                    callsid: query_string["callsid"]
+                },
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (result) {
+                    console.log(result);
+                }
+            });
         }, 5000);
 
     });
