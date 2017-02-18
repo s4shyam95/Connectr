@@ -13,7 +13,7 @@ from twilio.rest import TwilioRestClient
 import re
 import twilio.twiml
 from flockApp2.models import *
-from pyflock import FlockClient, Download, Views, Attachment
+from pyflock import FlockClient, Download, Views, Attachment, Button, OpenWidgetAction
 from pyflock import Message, SendAs
 import random
 from django.urls import reverse
@@ -503,7 +503,7 @@ def transcribed(request):
     return HttpResponse('ok')
 
 
-def save_recording(recording_url, callsid):
+def save_recording(recording_url, callsid, number):
     # log("deleting file")
     # try:
     # os.remove('Twilio.wav')
@@ -555,14 +555,23 @@ def save_recording(recording_url, callsid):
     lis = MobUser.objects.filter(call_sid=callsid).order_by('pk')
     mobuser = lis[0]
     r = Route.objects.filter(digits=mobuser.interaction, flock_group__company=company).order_by('pk')[0]
-
     flock_client = FlockClient(token=r.flock_group.access_token, app_id=app_id)
+    sidebar_url = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + \
+                  r.flock_group.group_id.split(':')[1] + '&number=' + number
+
+    text_payload = text
+    b1 = Button(name = "Claim Ticket", id="1", action=OpenWidgetAction(url=sidebar_url, desktop_type="sidebar"))
+    attachment = Attachment(title="Incoming Call", buttons=[b1])
+
     send_as_hal = SendAs(name='@' + mobuser.number + ' on Call',
                          profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
 
-    # send attachment here, not message!, on click of that button, do callupdate!
-    send_as_message = Message(to=r.flock_group.group_id, text=text + ' ~ ' + callsid, send_as=send_as_hal)
-    res = flock_client.send_chat(send_as_message)
+
+    button_message = Message(to=r.flock_group.group_id, text=text_payload, attachments = [attachment],send_as=send_as_hal)
+
+    res = flock_client.send_chat(button_message)
+    log(res)
+    return HttpResponse('ok')
 
 
 @csrf_exempt
@@ -578,6 +587,6 @@ def handle_recording(request):
     twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
                             name='wait_')
 
-    threading.Thread(target=save_recording, args=(recording_url, callsid,)).start()
+    threading.Thread(target=save_recording, args=(recording_url, callsid,request.POST['From'])).start()
     return HttpResponse(str(twilio_response))
 
