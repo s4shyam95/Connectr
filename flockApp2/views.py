@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.html import escape
 import json, jwt
 from twilio.util import TwilioCapability
+from twilio.rest import TwilioRestClient
 import re
 import twilio.twiml
 from flockApp2.models import *
@@ -283,6 +284,27 @@ def wait_music(request):
 
 @csrf_exempt
 def incoming(request):
+
+
+
+
+    callsid = request.POST["CallSid"]
+    log(callsid)
+
+
+    # exp begins
+
+    twilio_response = twilio.twiml.Response()
+    twilio_response.say("Your query has been sent to the team. You will now be connected to a customer sales"
+                        " representative. Please hold the line")
+    twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
+                            name='wait_')
+    return HttpResponse(str(twilio_response))
+
+    # exp ends
+
+
+
     resp = twilio.twiml.Response()
     # Greet the caller by name
     # log('wait_'+request.POST.get('From', ''))
@@ -329,6 +351,31 @@ def handle_key(request):
         return HttpResponse(str(resp))
 
 
+
+@csrf_exempt
+def callupdate(request):
+    callsid = request.GET['callsid']
+    account_sid = "AC0fce7ce826b2ddcf434406b708fa8f32"
+    auth_token = "7ed3c51485f2893e9cb980efdf3fe8ea"
+    client = TwilioRestClient(account_sid, auth_token)
+    call = client.calls.update(
+        callsid,
+        url="https://peaceful-hollows-95315.herokuapp.com/gimme/",
+        method="POST")
+    print(call.to)
+
+
+@csrf_exempt
+def gimme(request):
+    resp = twilio.twiml.Response()
+    #
+    # # Nest &lt;Client> TwiML inside of a &lt;Dial> verb
+    with resp.dial(callerId=caller_id) as r:
+        r.client("jenny")
+
+    return HttpResponse(str(resp))
+
+
 @csrf_exempt
 def handle_recording(request):
     """Play back the caller's recording."""
@@ -365,5 +412,9 @@ def handle_recording(request):
         resp.say("Goodbye.")
     except Exception, e:
         log(e)
+
+
+
+
     return HttpResponse(str(resp))
 

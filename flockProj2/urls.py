@@ -30,4 +30,6 @@ urlpatterns = [
     url(r'handle-key', handle_key),
     url(r'handle-recording', handle_recording),
     url(r'wait_music', wait_music, name="wait_music"),
+    url(r'gimme', gimme),
+    url(r'callupdate', callupdate),
 ]
