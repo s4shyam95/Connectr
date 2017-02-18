@@ -470,8 +470,10 @@ def handle_recording(request):
         r = requests.get(recording_url, stream=True)
         if r.status_code == 200:
             with open('Twilio.wav', 'wb') as f:
-                r.raw.decode_content = True
-                shutil.copyfileobj(r.raw, f)
+                for block in r.iter_content(1024):
+                    f.write(block)
+                # r.raw.decode_content = True
+                # shutil.copyfileobj(r.raw, f)
                 # file_name = wget.download(recording_url)
                 # os.rename(file_name, 'Twilio.wav')
     except Exception, e:
@@ -487,6 +489,7 @@ def handle_recording(request):
             log("text is " + str(text))
         except LookupError:  # speech is unintelligible
             text = "Problem understanding"
+            log(text)
             # print("Could not understand audio")
     except Exception, e:
         log('t2' + e.message)
