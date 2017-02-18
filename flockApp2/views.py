@@ -167,11 +167,11 @@ def configure(request):
     context['company_name'] = company_name
     ccs = Company.objects.filter(team_id=company_name)
 
-    if(ccs):
-        context['call'] = False
+    if not ccs:
+        context['call'] = True
         context['grps'] = grps
     else:
-        context['call'] = True
+        context['call'] = False
         cc = ccs[0]
         context['routes'] = Route.objects.filter(flock_group__company=cc)
 
