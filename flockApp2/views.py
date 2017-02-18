@@ -297,15 +297,13 @@ def handle_key(request):
 def handle_recording(request):
     """Play back the caller's recording."""
     recording_url = request.POST["RecordingUrl"]
-    ll = Log()
-    ll.text = str(request.POST["RecordingUrl"])
-    ll.save(force_insert=True)
     resp = twilio.twiml.Response()
     resp.say("Thanks for howling... take a listen to what you howled.")
     resp.play(recording_url)
     log("rec : " + str(recording_url))
     testfile = urllib.URLopener()
-    testfile.retrieve(str(recording_url), "Twilio.wav")
+    # testfile.retrieve(str(recording_url), "Twilio.wav")
+    testfile.retrieve("https://api.twilio.com/2010-04-01/Accounts/AC0fce7ce826b2ddcf434406b708fa8f32/Recordings/RE73149b5d92efd94cf31df526ed37d521", "Twilio.wav")
     log("here1")
     r = sr.Recognizer()
     with sr.WavFile("Twilio.wav") as source:              # use "test.wav" as the audio source
