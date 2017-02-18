@@ -9,7 +9,7 @@ from twilio.rest import TwilioRestClient
 import re
 import twilio.twiml
 from flockApp2.models import *
-from pyflock import FlockClient
+from pyflock import FlockClient, Download, Views, Attachment
 from pyflock import Message, SendAs
 import random
 import speech_recognition as sr
@@ -412,9 +412,42 @@ def callupdate(request):
 def gimme(request):
     resp = twilio.twiml.Response()
     callsid = request.GET['callsid']
-    with resp.dial(callerId=caller_id) as r:
+    resp.say('This call will be recorded for training purposes.')
+    with resp.dial(callerId=caller_id, record="record-from-answer-dual", action="/call-recording/") as r:
         r.client(callsid)
     return HttpResponse(str(resp))
+
+
+@csrf_exempt
+def callrecording(request):
+    url = request.POST['RecordingUrl']
+    d = Download(src="http://wallpapercave.com/wp/H630T6R.jpg")
+    views = Views()
+    views.add_flockml("<flockml>Download the <i>Audio Recording</i></flockml>")
+
+    callsid = request.POST['CallSid']
+    lis = MobUser.objects.all().order_by('pk')
+    mu = lis[len(lis)-1]
+    intr = mu.iteraction
+
+    companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
+    company = companies[len(companies) - 1]
+
+    rr = Route.objects.get(flock_group__company=company,digits=intr)
+
+    grp = rr.flock_group
+
+    flock_client = FlockClient(token=grp.access_token, app_id=app_id)
+
+
+    send_as_hal = SendAs(name='@CallRecorder',
+                         profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+
+    attachment = Attachment(title="Audio Recording from Call", downloads=[d], views=views)
+    files_message = Message(to=grp.group_id, attachments = [attachment],send_as=send_as_hal)
+    res = flock_client.send_chat(files_message)
+
+    return HttpResponse('ok')
 
 
 @csrf_exempt
