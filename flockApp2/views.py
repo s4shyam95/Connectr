@@ -13,10 +13,8 @@ from pyflock import FlockClient, Download, Views, Attachment
 from pyflock import Message, SendAs
 import random
 import speech_recognition as sr
-import os
 import requests
 import shutil
-from flockProj2.settings import STATIC_PATH
 from django.urls import reverse
 
 
@@ -391,7 +389,6 @@ def incomingWidget(request):
     context_dict = {}
     context_dict['token'] = token
     context_dict['group_id'] = group_id
-
     # TODO
     # change this to incoming call
     return render(request, 'client.html', context_dict)
@@ -404,8 +401,8 @@ def callupdate(request):
     account_sid = TWILIO_ACCOUNT_SID
     auth_token = TWILIO_AUTH_TOKEN
     client = TwilioRestClient(account_sid, auth_token)
-    gimme_url = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + group_id
-    log(gimme_url)
+    gimme_url = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + \
+                group_id.split(':')[1]
     call = client.calls.update(
         callsid,
         url=gimme_url,
@@ -427,6 +424,7 @@ def gimme(request):
 
 @csrf_exempt
 def callrecording(request, group='ERROR'):
+    group = "g:" + group
     log(group)
     url = request.POST['RecordingUrl']
     d = Download(src="http://wallpapercave.com/wp/H630T6R.jpg")
@@ -476,7 +474,7 @@ def handle_recording(request):
                 # file_name = wget.download(recording_url)
                 # os.rename(file_name, 'Twilio.wav')
     except Exception, e:
-        log('t1'+e)
+        log('t1' + e)
     r = sr.Recognizer()
     text = "prob"
     try:
@@ -489,7 +487,7 @@ def handle_recording(request):
             text = "Problem understanding"
             # print("Could not understand audio")
     except Exception, e:
-        log('t2'+e)
+        log('t2' + e)
 
 
     # send text to flock,
