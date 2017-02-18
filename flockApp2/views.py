@@ -1,7 +1,10 @@
+import threading
+
 from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 import os
 import json, jwt
@@ -14,10 +17,8 @@ from pyflock import FlockClient, Download, Views, Attachment
 from pyflock import Message, SendAs
 import random
 import speech_recognition as sr
-import requests
-import shutil
 from django.urls import reverse
-
+import time
 
 # Voice code begins here
 caller_id = "+19172596412 "
@@ -447,18 +448,7 @@ def callrecording(request, group='ERROR'):
     return HttpResponse(str(resp))
 
 
-@csrf_exempt
-def handle_recording(request):
-    """Play back the caller's recording."""
-    log("reached handle recording")
-    callsid = request.POST['CallSid']
-    recording_url = request.POST["RecordingUrl"]
-
-    twilio_response = twilio.twiml.Response()
-    twilio_response.say("Your query has been sent to the team. You will now be connected to a customer sales"
-                        " representative. Please hold the line")
-    twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
-                            name='wait_')
+def save_recording(recording_url, callsid):
     log("deleting file")
     try:
         os.remove('Twilio.wav')
@@ -469,13 +459,14 @@ def handle_recording(request):
     try:
         # r = requests.get(recording_url, stream=True)
         # if r.status_code == 200:
-        #     with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
-        #         # for block in r.iter_content(1024):
+        # with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
+        # # for block in r.iter_content(1024):
         #         # f.write(block)
         #         r.raw.decode_content = True
         #         shutil.copyfileobj(r.raw, f)
         #     f.close()
         os.system("wget -O Twilio.wav " + recording_url)
+        time.sleep(5)
     except Exception, e:
         log('t1' + e.message)
 
@@ -513,5 +504,21 @@ def handle_recording(request):
     # send attachment here, not message!, on click of that button, do callupdate!
     send_as_message = Message(to=r.flock_group.group_id, text=text + ' ~ ' + callsid, send_as=send_as_hal)
     res = flock_client.send_chat(send_as_message)
+
+
+@csrf_exempt
+def handle_recording(request):
+    """Play back the caller's recording."""
+    log("reached handle recording")
+    callsid = request.POST['CallSid']
+    recording_url = request.POST["RecordingUrl"]
+
+    twilio_response = twilio.twiml.Response()
+    twilio_response.say("Your query has been sent to the team. You will now be connected to a customer sales"
+                        " representative. Please hold the line")
+    twilio_response.enqueue(waitUrl=request.build_absolute_uri(reverse('wait_music')), waitUrlMethod='POST',
+                            name='wait_')
+
+    threading.Thread(target=save_recording, args=(recording_url, callsid,)).start()
     return HttpResponse(str(twilio_response))
 
