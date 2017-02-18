@@ -1,5 +1,3 @@
-import urllib
-
 from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -7,9 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
-import os
 import json, jwt
-import time
 import requests
 from twilio.util import TwilioCapability
 from twilio.rest import TwilioRestClient
@@ -19,14 +15,14 @@ from flockApp2.models import *
 from pyflock import FlockClient, Download, Views, Attachment
 from pyflock import Message, SendAs
 import random
-import speech_recognition as sr
 from django.urls import reverse
 
 # Voice code begins here
 caller_id = "+19172596412 "
 default_client = "Shyam"
 
-from flockProj2.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_DEFAULT_CALLERID, APPLICATION_SID, NGROK_URL
+from flockProj2.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_DEFAULT_CALLERID, APPLICATION_SID, \
+    NGROK_URL
 
 digits_dict = {
     "1": "one",
@@ -330,8 +326,8 @@ def handle_ivr(request):
         connect_sucessful = "You are now connected to " + company.name + "'s " + group_name + " team." + \
                             " Please explain your query in brief after the tone and press hash to finish."
         twilio_response.say(connect_sucessful)
-         # twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#',
-         #                       transcribe='true', transcribeCallback='/transcribe_handle')
+        # twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#',
+        # transcribe='true', transcribeCallback='/transcribe_handle')
         twilio_response.record(maxLength="120", playBeep="true", action="/handle-recording", finishOnKey='#')
         twilio_response.say(
             "Sorry, we didn't get your recording. Please try again after the tone and press hash to finish.")
@@ -468,32 +464,31 @@ def transcribed(request):
     r = Route.objects.filter(digits=mobuser.interaction, flock_group__company=company).order_by('pk')[0]
 
     hostUrl = "https://api.flock.co/v1/chat.sendMessage/"
-    sidebar_url  = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + \
-                r.flock_group.group_id.split(':')[1]+'&number='+number
-
+    sidebar_url = "https://peaceful-hollows-95315.herokuapp.com/gimme/?callsid=" + callsid + '&group_id=' + \
+                  r.flock_group.group_id.split(':')[1] + '&number=' + number
 
     token_payload = r.flock_group.access_token
     to_payload = r.flock_group.group_id
     text_payload = text
     attachment_title = 'Incoming Call'
-    attachment_description = 'Accept request from user regarding '+text
-    icon_url="https://freeiconshop.com/wp-content/uploads/edd/phone-solid.png"
+    attachment_description = 'Accept request from user regarding ' + text
+    icon_url = "https://freeiconshop.com/wp-content/uploads/edd/phone-solid.png"
     payload = [{
-        'title': attachment_title,
-        'description': attachment_description,
-        'buttons': [{
-                'name': 'Claim Ticket',
-                'icon': icon_url,
-                'action': {
-                    'type': 'openWidget',
-                    'desktopType': 'sidebar',
-                    'mobileType': 'modal',
-                    'url': sidebar_url,
-                },
-                'id': '1'
-            }
-        ]
-    }]
+                   'title': attachment_title,
+                   'description': attachment_description,
+                   'buttons': [{
+                                   'name': 'Claim Ticket',
+                                   'icon': icon_url,
+                                   'action': {
+                                       'type': 'openWidget',
+                                       'desktopType': 'sidebar',
+                                       'mobileType': 'modal',
+                                       'url': sidebar_url,
+                                   },
+                                   'id': '1'
+                               }
+                   ]
+               }]
     attachment_payload = json.dumps(payload)
     # print attachment_payload
     payload = 'token=' + token_payload + '&to=' + to_payload + '&text=' + text_payload + '&attachments=' + attachment_payload
@@ -501,7 +496,7 @@ def transcribed(request):
     # print payload
     headers = {
         'content-type': "application/x-www-form-urlencoded",
-         }
+    }
     response = requests.request("POST", hostUrl, data=payload, headers=headers)
     log(response.text)
     return HttpResponse('ok')
@@ -510,7 +505,7 @@ def transcribed(request):
 def save_recording(recording_url, callsid):
     # log("deleting file")
     # try:
-    #     os.remove('Twilio.wav')
+    # os.remove('Twilio.wav')
     # except OSError:
     #     pass
     # log("downloading begins")
@@ -550,8 +545,7 @@ def save_recording(recording_url, callsid):
     # except Exception, e:
     #     log('t2' + e.message)
 
-    text = requests.get(NGROK_URL,{'recording_url':recording_url}).text
-
+    text = requests.get(NGROK_URL, {'recording_url': recording_url}).text
     # send text to flock,
     companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
     company = companies[len(companies) - 1]
