@@ -479,8 +479,8 @@ def handle_recording(request):
             f.close()
             while not os.path.exists('Twilio.wav'):
                 with open('Twilio.wav', 'wb') as f:
-                for block in r.iter_content(1024):
-                    f.write(block)
+                    for block in r.iter_content(1024):
+                        f.write(block)
                 f.close()
     except Exception, e:
         log('t1' + e.message)
