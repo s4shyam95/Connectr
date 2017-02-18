@@ -89,8 +89,8 @@
 <script type="text/javascript">
     Twilio.Device.setup("{{ token }}");
     Twilio.Device.ready(function (device) {
-        params = {"PhoneNumber": $("#number2").val()};
-        Twilio.Device.connect(params);
+{#        params = {"PhoneNumber": $("#number2").val()};#}
+{#        Twilio.Device.connect(params);#}
         $("#log").text("Ready");
     });
 
