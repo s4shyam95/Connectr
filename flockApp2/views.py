@@ -425,23 +425,15 @@ def gimme(request):
 @csrf_exempt
 def callrecording(request, group='ERROR'):
     group = "g:" + group
-    log(group)
+    group = group.strip()
     url = request.POST['RecordingUrl']
+    callsid = request.POST['CallSid']
+    log(group)
+    fg = FlockGroup.objects.get(group_id=group)
+
     d = Download(src="http://wallpapercave.com/wp/H630T6R.jpg")
     views = Views()
     views.add_flockml("<flockml>Download the <i>Audio Recording</i></flockml>")
-    callsid = request.POST['CallSid']
-    # lis = MobUser.objects.all().order_by('pk')
-    # mu = lis[len(lis) - 1]
-    # intr = mu.iteraction
-    #
-    # companies = Company.objects.filter(number=TWILIO_DEFAULT_CALLERID).order_by('pk')
-    # company = companies[len(companies) - 1]
-    #
-    # rr = Route.objects.get(flock_group__company=company, digits=intr)
-    #
-    # grp = rr.flock_group
-    fg = FlockGroup.objects.get(group_id=group)
     flock_client = FlockClient(token=fg.access_token, app_id=app_id)
     send_as_hal = SendAs(name='@CallRecorder',
                          profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
