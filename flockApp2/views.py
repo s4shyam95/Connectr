@@ -417,7 +417,7 @@ def callupdate(request):
 def gimme(request):
     resp = twilio.twiml.Response()
     callsid = request.GET['callsid']
-    group_id = request.POST['group_id']
+    group_id = request.GET['group_id']
     resp.say('This call will be recorded for training purposes.')
     with resp.dial(callerId=caller_id, record="record-from-answer-dual",
                    action="/callrecording/" + group_id + "/") as r:
