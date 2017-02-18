@@ -147,15 +147,17 @@ def configure(request):
     flock_client = FlockClient(token=u.access_token, app_id=app_id)
     grps = flock_client.get_groups()
     flag = 0
+    rett = None
     for i in grps:
         ret = Group.objects.filter(grp_id=i['id'])
         if len(ret) > 0:
             flag = 1
+            rett = ret[0]
     context = {}
     if flag==1:
-        u.grp = ret[0]
+        u.grp = rett
         u.save()
-        context['grp'] = ret[0]
+        context['grp'] = rett
         context['live'] = False
     else:
 
