@@ -467,25 +467,26 @@ def handle_recording(request):
     log("downloading begins")
 
     try:
-        r = requests.get(recording_url, stream=True)
-        if r.status_code == 200:
-            with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
-                # for block in r.iter_content(1024):
-                # f.write(block)
-                r.raw.decode_content = True
-                shutil.copyfileobj(r.raw, f)
-            f.close()
+        # r = requests.get(recording_url, stream=True)
+        # if r.status_code == 200:
+        #     with open(os.path.join('/tmp', 'twi_audio.wav'), 'wb') as f:
+        #         # for block in r.iter_content(1024):
+        #         # f.write(block)
+        #         r.raw.decode_content = True
+        #         shutil.copyfileobj(r.raw, f)
+        #     f.close()
+        os.system("wget -O Twilio.wav " + recording_url)
     except Exception, e:
         log('t1' + e.message)
 
-    if not os.path.exists(os.path.join('/tmp', 'twi_audio.wav')):
+    if not os.path.exists('Twilio.wav'):
         log('FUCKCKCKCKCKCKCK')
 
     log("reco begins")
     reco = sr.Recognizer()
     text = "prob"
     try:
-        with sr.WavFile(os.path.join('/tmp', 'twi_audio.wav')) as source:  # use "test.wav" as the audio source
+        with sr.WavFile('Twilio.wav') as source:  # use "test.wav" as the audio source
             audio = reco.record(source)  # extract audio data from the file
         try:
             text = reco.recognize_google(audio, language="en-us", show_all=False)
