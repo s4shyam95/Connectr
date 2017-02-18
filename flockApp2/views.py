@@ -470,17 +470,17 @@ def handle_recording(request):
     try:
         r = requests.get(recording_url, stream=True)
         if r.status_code == 200:
-            with open(os.path.join(STATIC_PATH, 'Twilio.wav'), 'wb') as f:
+            with open('Twilio.wav', 'wb') as f:
                 r.raw.decode_content = True
                 shutil.copyfileobj(r.raw, f)
                 # file_name = wget.download(recording_url)
                 # os.rename(file_name, 'Twilio.wav')
     except Exception, e:
-        log(e)
+        log('t1'+e)
     r = sr.Recognizer()
     text = "prob"
     try:
-        with sr.WavFile(os.path.join(STATIC_PATH, 'Twilio.wav')) as source:  # use "test.wav" as the audio source
+        with sr.WavFile('Twilio.wav') as source:  # use "test.wav" as the audio source
             audio = r.record(source)  # extract audio data from the file
         try:
             text = r.recognize_google(audio, language="en-us", show_all=False)
@@ -489,7 +489,7 @@ def handle_recording(request):
             text = "Problem understanding"
             # print("Could not understand audio")
     except Exception, e:
-        log(e)
+        log('t2'+e)
 
 
     # send text to flock,

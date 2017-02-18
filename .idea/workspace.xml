@@ -26,7 +26,7 @@
       <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flockProj2/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="615">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
               <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
               <folding />
             </state>
@@ -36,8 +36,8 @@
       <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flockProj2/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1436" max-vertical-offset="2190">
-              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1661" max-vertical-offset="2190">
+              <caret line="122" column="13" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
               <folding>
                 <element signature="e#314#323#0" expanded="true" />
               </folding>
@@ -58,8 +58,8 @@
       <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3194707" vertical-offset="6296" max-vertical-offset="7140">
-              <caret line="471" column="32" selection-start-line="471" selection-start-column="32" selection-end-line="471" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.5746692" vertical-offset="6326" max-vertical-offset="7140">
+              <caret line="482" column="72" selection-start-line="482" selection-start-column="72" selection-end-line="482" selection-end-column="72" />
               <folding>
                 <element signature="e#1085#1157#0" expanded="false" />
                 <element signature="e#1242#1436#0" expanded="false" />
@@ -132,8 +132,8 @@
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/flockProj2/urls.py" />
         <option value="$PROJECT_DIR$/templates/client.html" />
-        <option value="$PROJECT_DIR$/flockApp2/views.py" />
         <option value="$PROJECT_DIR$/flockApp2/models.py" />
+        <option value="$PROJECT_DIR$/flockApp2/views.py" />
       </list>
     </option>
   </component>
@@ -690,10 +690,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/client.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.541667" vertical-offset="1730" max-vertical-offset="3045">
+          <caret line="137" column="42" selection-start-line="137" selection-start-column="42" selection-end-line="137" selection-end-column="42" />
+          <folding>
+            <element signature="n#style#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/flockProj2/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="2190">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1661" max-vertical-offset="2190">
+          <caret line="122" column="13" selection-start-line="122" selection-start-column="13" selection-end-line="122" selection-end-column="13" />
           <folding>
             <element signature="e#314#323#0" expanded="true" />
           </folding>
@@ -716,18 +728,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/client.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.541667" vertical-offset="1730" max-vertical-offset="3045">
-          <caret line="137" column="42" selection-start-line="137" selection-start-column="42" selection-end-line="137" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1200">
@@ -738,8 +738,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flockApp2/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3194707" vertical-offset="6296" max-vertical-offset="7140">
-          <caret line="471" column="32" selection-start-line="471" selection-start-column="32" selection-end-line="471" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.5746692" vertical-offset="6326" max-vertical-offset="7140">
+          <caret line="482" column="72" selection-start-line="482" selection-start-column="72" selection-end-line="482" selection-end-column="72" />
           <folding>
             <element signature="e#1085#1157#0" expanded="false" />
             <element signature="e#1242#1436#0" expanded="false" />
