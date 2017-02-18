@@ -249,7 +249,7 @@ def client(request):
     capability = TwilioCapability(account_sid, auth_token)
     application_sid = "APf6eb9001848f45a70d2f264b6f585b8d"  # Twilio Application Sid
     capability.allow_client_outgoing(application_sid)
-    capability.allow_client_incoming("jenny")
+    capability.allow_client_incoming("bob")
     token = capability.generate()
     context_dict = {}
     context_dict['token'] = token
@@ -290,7 +290,7 @@ def incoming(request):
     resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
     resp.play("http://demo.twilio.com/hellomonkey/monkey.mp3")
     with resp.dial(callerId=caller_id) as r:
-        r.client("jenny")
+        r.client("bob")
 
     return HttpResponse(str(resp))
 
