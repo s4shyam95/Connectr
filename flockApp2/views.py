@@ -110,7 +110,7 @@ def listen(request):
             text = "'" + text + "' to " + str(msg.ipman.name)
             flock_client = FlockClient(token=access, app_id=app_id)
             send_as_hal = SendAs(name=str(data["userName"]),
-                                 profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+                                 profile_image='https://f.flockusercontent2.com/0f2c0301487471044df94e37')
             send_as_message = Message(to=g.grp_id, text=text, send_as=send_as_hal)
             res = flock_client.send_chat(send_as_message)
             return HttpResponse('{"text": "Reply Sent to User"}')
@@ -129,7 +129,7 @@ def listen(request):
             text = "'" + text + "' to " + str(msg.ipman.name)
             flock_client = FlockClient(token=access, app_id=app_id)
             send_as_hal = SendAs(name=str(data["userName"]),
-                                 profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+                                 profile_image='https://f.flockusercontent2.com/0f2c0301487471044df94e37')
             send_as_message = Message(to=g.grp_id, text=text, send_as=send_as_hal)
             res = flock_client.send_chat(send_as_message)
             return HttpResponse('{"text": "Reply Sent to User"}')
@@ -226,7 +226,7 @@ def new_message(request):
     msg.save(force_insert=True)
     flock_client = FlockClient(token=access, app_id=app_id)
     send_as_hal = SendAs(name='@' + msg.ipman.name + ' on LiveChat',
-                         profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+                         profile_image='https://f.flockusercontent2.com/0f2c0301487471044df94e37')
     send_as_message = Message(to=grp_id, text=text, send_as=send_as_hal)
     res = flock_client.send_chat(send_as_message)
     return HttpResponse('ok')
@@ -441,7 +441,7 @@ def callrecording(request, group='ERROR'):
     views.add_flockml("<flockml>Download the <i>Audio Recording</i></flockml>")
     flock_client = FlockClient(token=fg.access_token, app_id=app_id)
     send_as_hal = SendAs(name='@CallRecorder',
-                         profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+                         profile_image='https://f.flockusercontent2.com/0f2c03014874709926303cfd')
 
     attachment = Attachment(title="Audio Recording from Call", downloads=[d], views=views)
     files_message = Message(to=fg.group_id, attachments=[attachment], send_as=send_as_hal)
@@ -561,12 +561,12 @@ def save_recording(recording_url, callsid, number):
                   r.flock_group.group_id.split(':')[1] + '&number=' + number
 
     log(sidebar_url)
-
+    text = text[0].upper() + text[1:].lower()
     text_payload = text
     b1 = Button(name = "Claim Ticket", id="1", action=OpenWidgetAction(url=sidebar_url, desktop_type="sidebar"))
     attachment = Attachment(title="Incoming Call", buttons=[b1])
     send_as_hal = SendAs(name='@' + mobuser.number + ' on Call',
-                         profile_image='https://pbs.twimg.com/profile_images/1788506913/HAL-MC2_400x400.png')
+                         profile_image='https://f.flockusercontent2.com/0f2c03014874710062189cbe')
 
 
     button_message = Message(to=r.flock_group.group_id, text=text_payload, attachments = [attachment],send_as=send_as_hal)
