@@ -19,7 +19,7 @@ import random
 from django.urls import reverse
 
 # Voice code begins here
-caller_id = "+19172596412 "
+caller_id = "+19172596412"
 default_client = "Shyam"
 
 from flockProj2.settings import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_DEFAULT_CALLERID, APPLICATION_SID, \
