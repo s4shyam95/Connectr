@@ -107,12 +107,13 @@
                             </div>
                             <button id="submit-call" class="btn btn-flock btn-block" >Submit</button>
                         {% else %}
+                            <div class="alert alert-success" role="alert">Your company has already configured the following settings for call routing. Your incoming endpoint is +1 917-259-6412</div>
                             <div id="input-groups">
                             {% for route in routes %}
                                 <div class="number-rows input-group col-xs-12">
                                     <span class="input-group-addon">Press</span>
                                     <input class="form-control disabled" disabled type="text" value="{{ route.digits }}">
-                                    <span class="input-group-addon">for</span>
+                                    <span class="input-group-addon">to call</span>
                                     <input class="form-control disabled" disabled type="text" value="{{ route.flock_group.group_name }}">
                                 </div>
                             {% endfor %}
