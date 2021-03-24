@@ -62,7 +62,7 @@ python-gcm==0.4
 pyttsx==1.1
 pytz==2016.7
 requests==2.9.1
-rsa==3.4.2
+rsa==4.1
 scikit-learn==0.18
 simplejson==3.8.2
 singledispatch==3.4.0.3
