@@ -75,7 +75,7 @@ telepot==8.3
 tornado==4.4.2
 twilio==5.7.0
 uritemplate==0.6
-urllib3==1.9.1
+urllib3==1.26.5
 wadofstuff-django-serializers==1.1.0
 Werkzeug==0.11.10
 WTForms==2.1
